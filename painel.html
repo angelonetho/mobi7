@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde-escuro: #01602A; --verde: #00984A; --lima: #78DE1F;
+    --fundo: #FFFFFF; --fundo-2: #F5F6F5; --sel: #EEF7E6;
+    --texto: #383838; --suave: #6E6E6E; --mudo: #A0A0A0; --linha: #E3E5E3; --grade: #EFEFEF;
+    --ok: #00843D; --alerta: #A35A00; --critico: #B3261E;
+    --s1: #0B6B3A; --s2: #F08A24; --s1-area: rgba(11, 107, 58, .12);
+    --faixa: rgba(56, 56, 56, .06); --faixa-evento: rgba(179, 38, 30, .10);
+    --destaque: var(--verde-escuro);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fundo: #101A15; --fundo-2: #15221C; --sel: #1B3020;
+      --texto: #E6EAE7; --suave: #A3ADA7; --mudo: #6F7B74; --linha: #26352D; --grade: #1D2A23;
+      --ok: #5AD893; --alerta: #F5A04A; --critico: #FF8A80;
+      --s1: #34A866; --s2: #DE6A14; --s1-area: rgba(52, 168, 102, .16);
+      --faixa: rgba(255, 255, 255, .05); --faixa-evento: rgba(255, 138, 128, .12);
+      --destaque: #5AD893;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fundo: #101A15; --fundo-2: #15221C; --sel: #1B3020;
+    --texto: #E6EAE7; --suave: #A3ADA7; --mudo: #6F7B74; --linha: #26352D; --grade: #1D2A23;
+    --ok: #5AD893; --alerta: #F5A04A; --critico: #FF8A80;
+    --s1: #34A866; --s2: #DE6A14; --s1-area: rgba(52, 168, 102, .16);
+    --faixa: rgba(255, 255, 255, .05); --faixa-evento: rgba(255, 138, 128, .12);
+    --destaque: #5AD893;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fundo); color: var(--texto); font: 15px/1.5 Barlow, "Helvetica Neue", Helvetica, Arial, sans-serif; font-variant-numeric: tabular-nums; }
+  .cifra { font-family: "Barlow Semi Condensed", Barlow, sans-serif; font-weight: 600; letter-spacing: -.01em; }
+
+  header { background: var(--verde-escuro); color: #fff; }
+  header .dentro { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
+  header h1 { margin: 0; font-size: 20px; font-weight: 700; }
+  header p { margin: 0; font-size: 14px; opacity: .8; }
+  .dentro { max-width: 1240px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+
+  /* Totais: uma linha de números, sem cartões */
+  .totais { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px 32px; padding-top: 28px; padding-bottom: 8px; }
+  .totais b { display: block; font-size: 34px; line-height: 1.1; color: var(--destaque); }
+  .totais span { font-size: 14px; color: var(--suave); }
+
+  h2 { font-size: 18px; font-weight: 700; margin: 36px 0 10px; }
+  h3 { font-size: 15px; font-weight: 700; margin: 0 0 8px; }
+  .nota-rodape { color: var(--suave); font-size: 14px; margin: 8px 0 0; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 9px 12px; border-bottom: 1px solid var(--linha); text-align: left; vertical-align: middle; }
+  th { font-size: 13px; font-weight: 600; color: var(--suave); border-bottom-color: var(--texto); white-space: nowrap; }
+  td.n, th.n { text-align: right; }
+  .rolagem { overflow-x: auto; }
+
+  /* Tabela de agências */
+  #agencias tr.ag { cursor: pointer; }
+  #agencias tr.ag:hover { background: var(--fundo-2); }
+  #agencias tr.ag.sel { background: var(--sel); box-shadow: inset 4px 0 0 var(--lima); }
+  #agencias td.nome button { all: unset; cursor: pointer; font-weight: 700; font-size: 16px; }
+  #agencias td.nome button:focus-visible { outline: 2px solid var(--verde); outline-offset: 3px; border-radius: 2px; }
+  #agencias td.nome small { display: block; color: var(--suave); font-size: 13px; font-weight: 400; }
+  #agencias td.nota { font-size: 22px; }
+  #agencias tr.vazia td:not(.nome) { color: var(--mudo); }
+  .spark { display: block; width: 150px; height: 28px; }
+  @media (max-width: 760px) { #agencias .opc { display: none; } }
+
+  .sit { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .sit svg { width: 11px; height: 11px; flex: none; }
+  .sit.ok { color: var(--ok); } .sit.alerta { color: var(--alerta); } .sit.critico { color: var(--critico); } .sit.neutro { color: var(--suave); font-weight: 500; }
+
+  /* Detalhe */
+  #detalhe { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 8px; }
+  .det-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .det-topo h2 { font-size: 30px; margin: 20px 0 4px; }
+  .descricao { max-width: 74ch; margin: 4px 0 0; color: var(--suave); }
+  .descricao strong { color: var(--texto); font-weight: 600; }
+  .variacao-aviso { display: inline-block; margin-top: 10px; padding: 3px 10px; background: var(--sel); border-left: 3px solid var(--lima); font-size: 14px; }
+
+  .numeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 24px 0 8px; border-top: 1px solid var(--linha); }
+  @media (max-width: 640px) { .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .numeros div { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--linha); min-width: 0; }
+  .numeros b { display: block; font-size: 26px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .numeros div:first-child b { color: var(--destaque); font-size: 30px; }
+  .numeros span { display: block; font-size: 14px; color: var(--suave); }
+  .numeros small { display: block; font-size: 13px; color: var(--mudo); }
+  .delta.mais { color: var(--ok); font-weight: 600; } .delta.menos { color: var(--critico); font-weight: 600; } .delta.igual { color: var(--mudo); }
+
+  .bloco { margin-top: 32px; min-width: 0; }
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 900px) { .duas { grid-template-columns: 1fr; gap: 0; } }
+  .graf { position: relative; width: 100%; }
+  .graf svg { display: block; width: 100%; overflow: visible; }
+  .graf text { font: 12px Barlow, sans-serif; fill: var(--suave); }
+  .legenda { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--suave); margin: 0 0 6px; }
+  .legenda i { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 6px; }
+  .legenda i.area { height: 10px; width: 10px; border: 1px solid var(--linha); }
+  .dica { position: absolute; pointer-events: none; background: var(--fundo); border: 1px solid var(--linha); padding: 6px 10px; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,.08); display: none; white-space: nowrap; z-index: 2; }
+  .dica .mudo { color: var(--suave); }
+  .composicao td { padding: 7px 8px; }
+  .composicao small { display: block; color: var(--suave); font-size: 12px; }
+  .composicao tr:last-child td { border-bottom: none; font-weight: 700; }
+  .violacoes { margin: 12px 0 0; padding-left: 20px; color: var(--critico); font-size: 14px; }
+  .aviso { margin: 12px 0 0; color: var(--alerta); font-size: 14px; }
+  details summary { cursor: pointer; color: var(--verde); font-weight: 600; font-size: 14px; margin-top: 10px; }
+  #variacoes tr[data-var] { cursor: pointer; }
+  #variacoes tr[data-var]:hover { background: var(--fundo-2); }
+  #variacoes tr.ativo { background: var(--sel); }
+
+  /* Formulário */
+  .form { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px 48px; background: var(--fundo-2); padding: 18px 20px; }
+  @media (max-width: 900px) { .form { grid-template-columns: 1fr; } }
+  .linha { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 4px 0; font-size: 14px; }
+  .linha label b { font-weight: 600; }
+  .linha label span { color: var(--suave); }
+  input[type=number], select { font: inherit; border: 1px solid var(--linha); border-radius: 4px; padding: 6px 9px; background: var(--fundo); color: var(--texto); min-width: 0; }
+  input:focus-visible, select:focus-visible { outline: 2px solid var(--verde); outline-offset: 1px; }
+  .linha input[type=number] { width: 72px; text-align: right; }
+  .campo { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; font-size: 14px; color: var(--suave); }
+  .check { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .check input { width: 17px; height: 17px; accent-color: var(--verde); }
+  .acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+  button.bt { font: inherit; font-weight: 600; border: none; border-radius: 999px; padding: 9px 20px; cursor: pointer; background: var(--lima); color: #003827; }
+  button.bt.sec { background: transparent; color: var(--texto); border: 1px solid var(--suave); padding: 8px 19px; }
+  button.bt:focus-visible { outline: 2px solid var(--verde); outline-offset: 2px; }
+  button.bt:disabled { opacity: .5; cursor: progress; }
+  .status { font-size: 14px; color: var(--suave); }
+  .status.erro { color: var(--critico); }
+  #saidas.excede { color: var(--critico); font-weight: 600; }
+  .vazio { color: var(--suave); padding: 24px 0; }
+  footer { color: var(--mudo); font-size: 13px; padding-top: 48px; padding-bottom: 32px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="dentro">
+    <h1>Dashboard</h1>
+    <p id="meta-topo">Janela pública de 28 dias</p>
+  </div>
+</header>
+
+<main class="dentro">
+  <div class="totais" id="totais"></div>
+
+  <h2>Agências</h2>
+  <div class="rolagem">
+    <table id="agencias">
+      <thead><tr>
+        <th>Agência</th><th>Situação</th><th class="n">Nota</th><th class="n">Atendimento</th>
+        <th class="n opc">Custo de obra</th><th class="n opc">Pico / limite (kW)</th><th class="n opc">Na ponta (kWh)</th><th class="opc">Pico diário</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="nota-rodape">Cada agência lê a solução de <b>solucoes/&lt;Agencia&gt;.json</b>. Clique numa linha para ver os detalhes.</p>
+
+  <section id="detalhe"></section>
+</main>
+<footer class="dentro">Simulação com o motor local (kickoff/motor.py). Os valores do juiz podem diferir se o motor não estiver fiel.</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = (x, casas = 0) => x == null || Number.isNaN(x) ? "–" : Number(x).toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
+const fmtS = (x, casas = 0) => (x > 0 ? "+" : x < 0 ? "−" : "") + fmt(Math.abs(x), casas);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+const DIA = 1440, PONTA = [1080, 1260];
+const ICONE = {
+  ok: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5 5 9l5-6"/></svg>',
+  critico: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3 3 9"/></svg>',
+  alerta: '<svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1 11 10H1z"/></svg>',
+  neutro: "",
+};
+const ITENS = { certo: "Certos", upgrade: "Upgrades", nao_atendido: "Não atendidos", demanda_contratada: "Demanda contratada", energia_ponta_kwh: "Energia na ponta", infraestrutura: "Obra" };
+const UNID = { demanda_contratada: " kW", energia_ponta_kwh: " kWh" };
+
+const SEM_SERVIDOR = "O servidor do dashboard não está rodando. Na pasta do kit, rode python3 painel.py e recarregue a página.";
+const E = { ags: [], dados: {}, sel: null, vista: {}, variantes: {} };
+
+async function api(path, opts) {
+  if (location.protocol === "file:") throw new Error(SEM_SERVIDOR);
+  let r;
+  try { r = await fetch(path, opts); } catch { throw new Error(SEM_SERVIDOR); }
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.erro || r.statusText);
+  return j;
+}
+
+function quando(min) {
+  const d = new Date(Date.UTC(2049, 9, 17) + min * 60000);
+  const p = n => String(n).padStart(2, "0");
+  return { dia: `${DIAS[d.getUTCDay()]} ${p(d.getUTCDate())}/${p(d.getUTCMonth() + 1)}`, hora: `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}`, dsem: d.getUTCDay() };
+}
+const ehPonta = t => { const ds = (Math.floor(t / DIA) % 7 + 7) % 7, m = ((t % DIA) + DIA) % DIA; return ds >= 1 && ds <= 5 && m >= PONTA[0] && m < PONTA[1]; };
+const lista = xs => xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " e " + xs[xs.length - 1];
+
+/* ---------- situação de cada agência ---------- */
+function situacao(d) {
+  if (!d || d.carregando) return { classe: "neutro", texto: "Simulando…" };
+  if (d.erro) return { classe: "critico", texto: "Erro" };
+  if (!d.solucao) return { classe: "neutro", texto: "Sem solução" };
+  const r = d.resultado;
+  if (!r.valido) return { classe: "critico", texto: "Inválida" };
+  if (r.violacoes && r.violacoes.length) return { classe: "critico", texto: `${r.violacoes.length} violação(ões)` };
+  if (r.nota == null) return { classe: "alerta", texto: "Sem nota" };
+  if (r.metricas.nao_atendidos > 0) return { classe: "alerta", texto: `${r.metricas.nao_atendidos} cliente(s) perdido(s)` };
+  return { classe: "ok", texto: "Válida" };
+}
+const sit = s => `<span class="sit ${s.classe}">${ICONE[s.classe]}${esc(s.texto)}</span>`;
+const custoTotal = r => r.custo_infra ? r.custo_infra.total : null;
+
+/* ---------- totais ---------- */
+function renderTotais() {
+  const ok = E.ags.map(a => E.dados[a.nome]).filter(d => d && d.resultado && d.resultado.valido);
+  const comNota = ok.filter(d => d.resultado.nota != null);
+  const contratos = ok.reduce((s, d) => s + d.resultado.metricas.contratos, 0);
+  const atendidos = ok.reduce((s, d) => s + d.resultado.metricas.contratos - d.resultado.metricas.nao_atendidos, 0);
+  const perdidos = ok.reduce((s, d) => s + d.resultado.metricas.nao_atendidos, 0);
+  const custo = ok.reduce((s, d) => s + (custoTotal(d.resultado) || 0), 0);
+  const comSol = E.ags.filter(a => E.dados[a.nome] && E.dados[a.nome].solucao).length;
+  $("totais").innerHTML = [
+    [comNota.length ? fmt(comNota.reduce((s, d) => s + d.resultado.nota, 0), 1) : "–", "nota somada"],
+    [`${comSol} de ${E.ags.length}`, "agências com solução"],
+    [contratos ? fmt(100 * atendidos / contratos, 2) + "%" : "–", `de atendimento (${fmt(atendidos)} de ${fmt(contratos)})`],
+    [fmt(perdidos), perdidos === 1 ? "cliente perdido" : "clientes perdidos"],
+    [custo ? fmt(custo) : "–", "de custo de obra"],
+  ].map(([v, r]) => `<div><b class="cifra">${v}</b><span>${r}</span></div>`).join("");
+}
+
+/* ---------- tabela de agências ---------- */
+function sparkline(pot, limite) {
+  const porDia = [];
+  for (let i = 0; i < pot.length; i += 96) porDia.push(Math.max(...pot.slice(i, i + 96)));
+  const w = 150, h = 28, max = Math.max(limite || 0, ...porDia, 1);
+  const x = i => (i / Math.max(porDia.length - 1, 1)) * w, y = v => h - 2 - (v / max) * (h - 4);
+  const pts = porDia.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const lim = limite ? `<line x1="0" x2="${w}" y1="${y(limite)}" y2="${y(limite)}" stroke="${css("--mudo")}" stroke-dasharray="2 3" stroke-width="1"/>` : "";
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="Pico diário de potência nos 28 dias">${lim}
+    <polyline points="${pts}" fill="none" stroke="${css("--s1")}" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+}
+
+function renderLinha(nome) {
+  const d = E.dados[nome], a = E.ags.find(x => x.nome === nome);
+  const tr = document.querySelector(`tr[data-ag="${CSS.escape(nome)}"]`);
+  const info = d && d.agencia ? `${d.agencia.vagas} vagas, ${fmt(d.agencia.contratos)} contratos${a.eventos.length ? ", com evento" : ""}` : "";
+  let cols = `<td></td><td class="n"></td><td class="n opc"></td><td class="n opc"></td><td class="n opc"></td><td class="opc"></td>`;
+  const r = d && d.resultado;
+  if (r && r.valido) {
+    const m = r.metricas;
+    cols = `<td class="n nota cifra">${r.nota == null ? "–" : fmt(r.nota, 1)}</td><td class="n">${fmt(m.atendimento_pct, 2)}%</td>
+      <td class="n opc">${fmt(custoTotal(r))}</td><td class="n opc">${fmt(m.pico_kw, 1)} / ${fmt(r.limite_kw, 1)}</td>
+      <td class="n opc">${fmt(m.energia_ponta_kwh)}</td><td class="opc">${sparkline(r.series.publico.potencia_kw, r.limite_kw)}</td>`;
+  }
+  tr.innerHTML = `<td class="nome"><button type="button">${esc(nome)}</button><small>${info}</small></td><td>${sit(situacao(d))}</td>${cols}`;
+  tr.classList.toggle("sel", E.sel === nome);
+  tr.classList.toggle("vazia", !(r && r.valido));
+  tr.querySelector("button").setAttribute("aria-pressed", E.sel === nome);
+}
+
+/* ---------- detalhe ---------- */
+function vistaAtual(nome) {
+  const d = E.dados[nome], v = E.vista[nome];
+  if (v != null && E.variantes[nome] && E.variantes[nome][v]) return { ...E.variantes[nome][v], variante: v };
+  return d && d.solucao ? { sub: d.solucao, res: d.resultado, variante: null } : null;
+}
+
+function descreverSolucao(sub, info) {
+  const car = Object.entries(sub.carregadores || {}).filter(([, n]) => n > 0).map(([k, n]) => `${n}× ${k}`);
+  const ent = info.entradas.find(e => e.id === sub.entrada), pol = sub.politica || {};
+  const partes = [
+    car.length ? lista(car) : "nenhum carregador",
+    `entrada ${sub.entrada}${ent ? ` (${fmt(ent.kw_util, 1)} kW úteis)` : ""}`,
+    sub.demanda_contratada_kw != null ? `demanda de ${fmt(sub.demanda_contratada_kw)} kW` : null,
+    `fila por ${pol.prioridade}`, `divisão ${pol.divisao}`,
+    pol.evitar_ponta ? "sem carga na ponta" : "carrega na ponta",
+  ].filter(Boolean);
+  return esc(partes.join(", ")) + ".";
+}
+
+function numero(valor, rotulo, extra = "") {
+  return `<div><b class="cifra">${valor}</b><span>${rotulo}</span>${extra ? `<small>${extra}</small>` : ""}</div>`;
+}
+function delta(atual, base, casas = 0, melhorMaior = true) {
+  if (base == null || atual == null) return "";
+  const d = atual - base;
+  if (Math.abs(d) < 1e-9) return `<span class="delta igual">igual à salva</span>`;
+  const bom = melhorMaior ? d > 0 : d < 0;
+  return `<span class="delta ${bom ? "mais" : "menos"}">${fmtS(d, casas)}</span> em relação à salva`;
+}
+
+function renderDetalhe() {
+  const nome = E.sel, alvo = $("detalhe");
+  if (!nome) { alvo.innerHTML = ""; return; }
+  const d = E.dados[nome];
+  if (!d || d.carregando) { alvo.innerHTML = `<h2 class="det-topo">${esc(nome)}</h2><p class="vazio">Simulando os 28 dias…</p>`; return; }
+  if (d.erro) { alvo.innerHTML = `<h2>${esc(nome)}</h2><p class="vazio">${esc(d.erro)}</p>`; return; }
+  const info = d.agencia, v = vistaAtual(nome);
+  const eventos = d.eventos.length ? ` Eventos ativos: ${esc(lista(d.eventos.map(e => e[0])))}.` : "";
+  let html = `<div class="det-topo"><h2>${esc(nome)}</h2>${v && v.variante == null ? sit(situacao(d)) : ""}</div>
+    <p class="descricao">${info.vagas} vagas, frota de ${info.frota} carros e ${fmt(info.contratos)} contratos. A entrada existente é ${esc(info.existente)}.${eventos}</p>`;
+  if (v) {
+    html += `<p class="descricao"><strong>${v.variante != null ? `Variação ${v.variante + 1}` : "Solução salva"}:</strong> ${descreverSolucao(v.sub, info)}</p>`;
+    if (v.variante != null) html += `<span class="variacao-aviso">Esta variação ainda não foi salva.</span>`;
+  }
+  if (!v) {
+    html += `<p class="vazio">${esc(nome)} ainda não tem solução. Escolha carregadores e política abaixo, simule e salve.</p>`;
+  } else if (!v.res.valido) {
+    html += `<ul class="violacoes">${v.res.erros.map(e => `<li>${esc(e)}</li>`).join("")}</ul>`;
+  } else {
+    const r = v.res, m = r.metricas, base = v.variante != null && d.resultado && d.resultado.valido ? d.resultado : null;
+    const bm = base ? base.metricas : {};
+    html += `<div class="numeros">
+      ${numero(r.nota == null ? "–" : fmt(r.nota, 1), "nota", base ? delta(r.nota, base.nota, 1) : r.violacoes.length ? "zerada por violação" : "")}
+      ${numero(fmt(m.atendimento_pct, 2) + "%", "de atendimento", base ? delta(m.atendimento_pct, bm.atendimento_pct, 2) : `${fmt(m.contratos - m.nao_atendidos)} de ${fmt(m.contratos)}`)}
+      ${numero(fmt(m.certos), "na categoria pedida", base ? delta(m.certos, bm.certos) : "")}
+      ${numero(fmt(m.upgrades), "com upgrade", base ? delta(m.upgrades, bm.upgrades) : "")}
+      ${numero(fmt(m.nao_atendidos), "clientes perdidos", base ? delta(m.nao_atendidos, bm.nao_atendidos, 0, false) : "")}
+      ${numero(fmt(custoTotal(r)), "de custo de obra", base ? delta(custoTotal(r), custoTotal(base), 0, false) : r.custo_infra ? `${fmt(r.custo_infra.carregadores)} em carregadores, ${fmt(r.custo_infra.entrada)} na entrada` : "")}
+      ${numero(fmt(m.pico_kw, 1) + " kW", "de pico", `limite de ${fmt(r.limite_kw, 1)} kW`)}
+      ${numero(fmt(m.energia_ponta_kwh) + " kWh", "na ponta", base ? delta(m.energia_ponta_kwh, bm.energia_ponta_kwh, 0, false) : "seg a sex, 18h às 21h")}
+    </div>`;
+    if (r.violacoes.length) html += `<ul class="violacoes">${r.violacoes.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}${r.violacoes.length > 8 ? `<li>e mais ${r.violacoes.length - 8}</li>` : ""}</ul>`;
+    if (r.aviso) html += `<p class="aviso">${esc(r.aviso)}</p>`;
+    html += `
+      <div class="bloco"><h3>Potência a cada 15 minutos</h3>
+        <div class="legenda"><span><i style="background:var(--s1)"></i>potência (kW)</span><span><i style="background:var(--mudo)"></i>limite</span><span><i class="area" style="background:var(--faixa)"></i>horário de ponta</span>${d.eventos.length ? `<span><i class="area" style="background:var(--faixa-evento)"></i>evento</span>` : ""}</div>
+        <div class="graf" id="g-pot"></div>
+        <details><summary>Ver dia a dia</summary><div class="rolagem" id="t-dia"></div></details>
+      </div>
+      <div class="bloco"><h3>Carros plugados e na fila</h3>
+        <div class="legenda"><span><i style="background:var(--s1)"></i>plugados</span><span><i style="background:var(--s2)"></i>na fila</span><span><i style="background:var(--mudo)"></i>saídas instaladas</span></div>
+        <div class="graf" id="g-plug"></div>
+      </div>
+      <div class="duas">
+        <div class="bloco"><h3>De onde vem a nota</h3><div id="g-nota"></div></div>
+        <div class="bloco"><h3>Carga dos carros na retirada</h3><div class="legenda"><span>${fmt(r.series.publico.soc_retirada.length)} retiradas, mínimo de 80%</span></div><div class="graf" id="g-soc"></div></div>
+      </div>`;
+  }
+  html += renderVariacoes(nome) + renderForm(nome, v ? v.sub : null);
+  alvo.innerHTML = html;
+  if (v && v.res.valido) desenharGraficos(nome, v);
+  ligarForm(nome);
+}
+
+/* ---------- gráficos ---------- */
+function eixoTempo(ini, n, passo, larg) {
+  const fim = ini + n * passo, dias = [];
+  for (let t = Math.ceil(ini / DIA) * DIA; t < fim; t += DIA) dias.push(t);
+  const pxDia = larg / ((fim - ini) / DIA);
+  const k = pxDia > 70 ? 1 : pxDia > 34 ? 2 : 7;
+  return dias.filter(t => k === 7 ? quando(t).dsem === 1 : Math.round(t / DIA) % k === 0);
+}
+
+function niceMax(v) {
+  if (v <= 0) return 1;
+  const p = 10 ** Math.floor(Math.log10(v)), f = v / p;
+  return [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find(x => f <= x) * p;
+}
+
+function grafTempo(el, { series, ini, passo, ref, faixas = [], unid, casas = 1, altura = 240, degrau = false }) {
+  const W = Math.max(el.clientWidth, 320), H = altura, m = { l: 40, r: 8, t: 14, b: 24 };
+  const n = series[0].valores.length, w = W - m.l - m.r, h = H - m.t - m.b;
+  const maxV = niceMax(Math.max(ref ? ref.valor : 0, ...series.flatMap(s => s.valores)) * 1.05);
+  const X = i => m.l + (i / n) * w, Y = v => m.t + h - (v / maxV) * h, T = t => X((t - ini) / passo);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(series.map(s => s.nome).join(" e "))} ao longo dos 28 dias">`;
+  for (const f of faixas) svg += `<rect x="${T(f.a).toFixed(1)}" y="${m.t}" width="${Math.max(1, T(f.b) - T(f.a)).toFixed(1)}" height="${h}" fill="${f.cor}"/>`;
+  for (const g of [0, .25, .5, .75, 1].map(f => f * maxV)) svg += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(g)}" y2="${Y(g)}" stroke="${css("--grade")}"/><text x="${m.l - 6}" y="${Y(g) + 4}" text-anchor="end">${fmt(g, g % 1 ? 1 : 0)}</text>`;
+  for (const t of eixoTempo(ini, n, passo, w)) svg += `<line x1="${T(t)}" x2="${T(t)}" y1="${m.t + h}" y2="${m.t + h + 4}" stroke="${css("--mudo")}"/><text x="${T(t)}" y="${H - 5}" text-anchor="middle">${quando(t).dia}</text>`;
+  for (const s of series) {
+    const pts = s.valores.map((v, i) => degrau ? `${X(i).toFixed(1)},${Y(v).toFixed(1)} ${X(i + 1).toFixed(1)},${Y(v).toFixed(1)}` : `${X(i + .5).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+    if (s.area) svg += `<polygon points="${X(0)},${Y(0)} ${pts} ${X(n)},${Y(0)}" fill="${s.area}"/>`;
+    svg += `<polyline points="${pts}" fill="none" stroke="${s.cor}" stroke-width="${s.largura || 1.5}" stroke-linejoin="round"/>`;
+  }
+  if (ref) svg += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(ref.valor)}" y2="${Y(ref.valor)}" stroke="${css("--mudo")}" stroke-width="1.5" stroke-dasharray="5 4"/><text x="${W - m.r}" y="${Y(ref.valor) - 5}" text-anchor="end" style="font-weight:600">${esc(ref.rotulo)}</text>`;
+  svg += `<line class="cruz" x1="0" x2="0" y1="${m.t}" y2="${m.t + h}" stroke="${css("--suave")}" stroke-width="1" visibility="hidden"/>`;
+  svg += series.map(s => `<circle class="pto" r="4" fill="${s.cor}" stroke="${css("--fundo")}" stroke-width="2" visibility="hidden"/>`).join("");
+  svg += `<rect x="${m.l}" y="${m.t}" width="${w}" height="${h}" fill="transparent" class="alvo"/></svg><div class="dica"></div>`;
+  el.innerHTML = svg;
+  const alvo = el.querySelector(".alvo"), dica = el.querySelector(".dica"), cruz = el.querySelector(".cruz"), pts = el.querySelectorAll(".pto");
+  alvo.addEventListener("mousemove", ev => {
+    const px = ev.clientX - el.getBoundingClientRect().left;
+    const i = Math.max(0, Math.min(n - 1, Math.floor((px - m.l) / w * n)));
+    const t = ini + i * passo, q = quando(t), cx = X(i + .5);
+    cruz.setAttribute("x1", cx); cruz.setAttribute("x2", cx); cruz.setAttribute("visibility", "visible");
+    pts.forEach((p, k) => { p.setAttribute("cx", cx); p.setAttribute("cy", Y(series[k].valores[i])); p.setAttribute("visibility", "visible"); });
+    const extra = [...new Set(faixas.filter(f => t >= f.a && t < f.b).map(f => f.rotulo))];
+    dica.innerHTML = `<div class="mudo">${q.dia}, ${q.hora}${extra.length ? ` (${esc(extra.join(", "))})` : ""}</div>` +
+      series.map(s => `<div><i style="display:inline-block;width:10px;height:3px;background:${s.cor};vertical-align:middle;margin-right:6px"></i>${esc(s.nome)}: <b>${fmt(s.valores[i], casas)}${unid}</b></div>`).join("");
+    dica.style.display = "block";
+    dica.style.left = (cx + 12 + dica.offsetWidth > W ? cx - 12 - dica.offsetWidth : cx + 12) + "px";
+    dica.style.top = (m.t + 4) + "px";
+  });
+  alvo.addEventListener("mouseleave", () => { dica.style.display = "none"; cruz.setAttribute("visibility", "hidden"); pts.forEach(p => p.setAttribute("visibility", "hidden")); });
+}
+
+function grafNota(el, r) {
+  if (!r.pontos) { el.innerHTML = `<p class="nota-rodape">${esc(r.aviso || "Sem nota.")}</p>`; return; }
+  const itens = r.pontos.itens, maxAbs = Math.max(...itens.map(i => Math.abs(i[3])), 1);
+  const linhas = itens.map(([k, q, p, pts]) => {
+    const pct = Math.abs(pts) / maxAbs * 50;
+    const barra = pts >= 0
+      ? `<div style="position:absolute;left:50%;width:${pct}%;top:6px;bottom:6px;background:var(--s1)"></div>`
+      : `<div style="position:absolute;right:50%;width:${pct}%;top:6px;bottom:6px;background:var(--s2)"></div>`;
+    return `<tr><td>${esc(ITENS[k] || k)}<small>${fmt(q, q % 1 ? 1 : 0)}${UNID[k] || ""} × ${fmt(p, p % 1 ? 1 : 0)}</small></td>
+      <td style="width:40%;position:relative;padding:0"><div style="position:absolute;left:50%;top:0;bottom:0;border-left:1px solid var(--linha)"></div>${barra}</td>
+      <td class="n">${fmtS(pts, 1)}</td></tr>`;
+  }).join("");
+  el.innerHTML = `<table class="composicao">${linhas}<tr><td>Nota${r.violacoes.length ? " (zerada por violação)" : ""}</td><td></td><td class="n">${fmt(r.nota, 1)}</td></tr></table>`;
+}
+
+function grafSoc(el, socs) {
+  const W = Math.max(el.clientWidth, 240), H = 190, m = { l: 34, r: 4, t: 10, b: 24 };
+  const bins = []; for (let b = 80; b < 100; b += 2) bins.push({ a: b, b: b + 2, n: 0 });
+  for (const s of socs) bins[Math.min(bins.length - 1, Math.max(0, Math.floor((s - 80) / 2)))].n++;
+  const maxN = niceMax(Math.max(...bins.map(b => b.n), 1)), w = W - m.l - m.r, h = H - m.t - m.b, bw = w / bins.length;
+  const Y = v => m.t + h - v / maxN * h;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribuição da carga na retirada">`;
+  for (const g of [0, .5, 1].map(f => f * maxN)) svg += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(g)}" y2="${Y(g)}" stroke="${css("--grade")}"/><text x="${m.l - 6}" y="${Y(g) + 4}" text-anchor="end">${fmt(g)}</text>`;
+  bins.forEach((b, i) => {
+    const x = m.l + i * bw + 1, y = Y(b.n);
+    if (b.n) svg += `<rect x="${x}" y="${y}" width="${bw - 2}" height="${m.t + h - y}" fill="${css("--s1")}"/>`;
+    svg += `<text x="${m.l + i * bw + bw / 2}" y="${H - 5}" text-anchor="middle">${b.a}%</text>`;
+    svg += `<rect x="${m.l + i * bw}" y="${m.t}" width="${bw}" height="${h}" fill="transparent" data-i="${i}" class="hit"/>`;
+  });
+  svg += `</svg><div class="dica"></div>`;
+  el.innerHTML = svg;
+  const dica = el.querySelector(".dica");
+  el.querySelectorAll(".hit").forEach(r => {
+    r.addEventListener("mousemove", () => {
+      const b = bins[+r.dataset.i];
+      dica.innerHTML = `<div class="mudo">de ${b.a}% a ${b.b}%</div><b>${fmt(b.n)}</b> retiradas`;
+      dica.style.display = "block";
+      dica.style.left = Math.min(m.l + (+r.dataset.i + .5) * bw + 10, W - dica.offsetWidth) + "px"; dica.style.top = "8px";
+    });
+    r.addEventListener("mouseleave", () => dica.style.display = "none");
+  });
+}
+
+function tabelaDiaria(el, s, ini) {
+  const linhas = [];
+  for (let k = 0; k < s.potencia_kw.length; k += 96) {
+    const fatia = s.potencia_kw.slice(k, k + 96), t0 = ini + k * 15, q = quando(t0);
+    let ponta = 0; fatia.forEach((p, j) => { if (ehPonta(t0 + j * 15)) ponta += p / 4; });
+    const perd = s.nao_atendidos_min.filter(t => t >= k * 15 && t < (k + 96) * 15).length;
+    linhas.push(`<tr><td>${q.dia}, ${q.hora}</td><td class="n">${fmt(fatia.reduce((a, b) => a + b, 0) / 4, 1)}</td><td class="n">${fmt(ponta, 1)}</td><td class="n">${fmt(Math.max(...fatia), 1)}</td><td class="n">${fmt(Math.max(...s.fila_max.slice(k, k + 96)))}</td><td class="n">${perd}</td></tr>`);
+  }
+  el.innerHTML = `<table><tr><th>Início das 24 h</th><th class="n">Energia (kWh)</th><th class="n">Na ponta (kWh)</th><th class="n">Pico (kW)</th><th class="n">Fila máxima</th><th class="n">Perdidos</th></tr>${linhas.join("")}</table>`;
+}
+
+function desenharGraficos(nome, v) {
+  const d = E.dados[nome], s = v.res.series.publico, ini = s.inicio_min, n = s.potencia_kw.length;
+  const faixas = [];
+  for (let dia = Math.floor(ini / DIA); dia * DIA < ini + n * 15; dia++) {
+    const t = dia * DIA + PONTA[0];
+    if (ehPonta(t)) faixas.push({ a: t, b: dia * DIA + PONTA[1], cor: css("--faixa"), rotulo: "ponta" });
+  }
+  for (const e of d.eventos) if (e.length >= 4 && typeof e[e.length - 2] === "number") {
+    const [a, b] = e[0] === "corte" ? [e[2], e[3]] : [e[e.length - 2], e[e.length - 1]];
+    faixas.push({ a, b, cor: css("--faixa-evento"), rotulo: `evento ${e[0]}` });
+  }
+  grafTempo($("g-pot"), { series: [{ nome: "potência", valores: s.potencia_kw, cor: css("--s1"), area: css("--s1-area") }], ini, passo: 15, unid: " kW", ref: { valor: v.res.limite_kw, rotulo: `limite de ${fmt(v.res.limite_kw, 1)} kW` }, faixas });
+  const saidas = Object.entries(v.sub.carregadores || {}).reduce((t, [k, q]) => t + q * ((d.agencia.carregadores.find(c => c.id === k) || {}).saidas || 0), 0);
+  grafTempo($("g-plug"), { series: [{ nome: "plugados", valores: s.plugados_max, cor: css("--s1"), largura: 2 }, { nome: "na fila", valores: s.fila_max, cor: css("--s2"), largura: 2 }], ini, passo: 15, unid: "", casas: 0, ref: { valor: saidas, rotulo: `${saidas} saídas` }, altura: 200, degrau: true });
+  grafNota($("g-nota"), v.res);
+  grafSoc($("g-soc"), s.soc_retirada);
+  tabelaDiaria($("t-dia"), s, ini);
+}
+
+/* ---------- variações ---------- */
+function renderVariacoes(nome) {
+  const vs = E.variantes[nome] || [], d = E.dados[nome];
+  if (!vs.length) return "";
+  const base = d.resultado && d.resultado.valido ? d.resultado : null;
+  const linha = (rot, sub, r, idx) => {
+    const ok = r.valido, m = ok ? r.metricas : null;
+    const car = Object.entries(sub.carregadores || {}).map(([k, q]) => `${q}× ${k}`).join(", ") || "nenhum carregador";
+    const desc = `${car}; ${sub.entrada}; ${sub.politica.prioridade}, ${sub.politica.divisao}${sub.politica.evitar_ponta ? ", sem ponta" : ""}`;
+    return `<tr data-var="${idx ?? ""}"${(E.vista[nome] ?? null) === idx ? ' class="ativo"' : ""}><td>${rot}</td><td>${esc(desc)}</td>
+      <td class="n cifra">${ok && r.nota != null ? fmt(r.nota, 1) : "–"}</td>
+      <td class="n">${ok && base && r.nota != null && base.nota != null && idx != null ? fmtS(r.nota - base.nota, 1) : ""}</td>
+      <td class="n">${ok ? fmt(m.atendimento_pct, 2) + "%" : "inválida"}</td><td class="n">${ok ? fmt(custoTotal(r)) : "–"}</td></tr>`;
+  };
+  return `<div class="bloco" id="variacoes"><h3>Variações testadas</h3><div class="rolagem"><table>
+    <thead><tr><th></th><th>Configuração</th><th class="n">Nota</th><th class="n">Diferença</th><th class="n">Atendimento</th><th class="n">Obra</th></tr></thead>
+    ${d.solucao ? linha("Salva", d.solucao, d.resultado, null) : ""}
+    ${vs.map((x, i) => linha(`Variação ${i + 1}`, x.sub, x.res, i)).join("")}
+  </table></div><p class="nota-rodape">Clique numa linha para ver os gráficos dela. As variações somem ao recarregar a página.</p></div>`;
+}
+
+function renderForm(nome, sub) {
+  const info = E.dados[nome].agencia;
+  sub = sub || { carregadores: {}, entrada: info.existente, politica: { prioridade: "menor_soc", divisao: "igual", evitar_ponta: false } };
+  const opt = (xs, val) => xs.map(x => `<option${x === val ? " selected" : ""}>${esc(x)}</option>`).join("");
+  return `<div class="bloco" id="form"><h3>Testar outra configuração</h3><div class="form">
+    <div>
+      ${info.carregadores.map(c => `<div class="linha"><label for="c-${c.id}"><b>${esc(c.id)}</b> <span>${esc(c.tipo)} de ${fmt(c.potencia_kw, 1)} kW, ${c.saidas} saída${c.saidas > 1 ? "s" : ""}${c.custo != null ? `, custa ${fmt(c.custo)}` : ""}</span></label>
+        <input type="number" min="0" step="1" id="c-${c.id}" data-car="${esc(c.id)}" data-saidas="${c.saidas}" value="${(sub.carregadores || {})[c.id] || 0}"></div>`).join("")}
+      <p class="nota-rodape" id="saidas"></p>
+    </div>
+    <div>
+      <label class="campo">Entrada elétrica<select id="f-entrada">${info.entradas.filter(e => e.permitida).map(e => `<option value="${esc(e.id)}"${e.id === sub.entrada ? " selected" : ""}>${esc(e.id)}, ${fmt(e.kw_util, 1)} kW úteis${e.id === info.existente ? " (existente)" : e.custo != null ? `, custa ${fmt(e.custo)}` : ""}</option>`).join("")}</select></label>
+      <label class="campo">Demanda contratada em kW (só A4 e SE)<input type="number" id="f-demanda" min="${info.demanda.min}" step="${info.demanda.passo}" placeholder="vazio usa o teto da entrada" value="${sub.demanda_contratada_kw ?? ""}"></label>
+      <label class="campo">Ordem da fila<select id="f-prioridade">${opt(info.menu.prioridade, sub.politica.prioridade)}</select></label>
+      <label class="campo">Divisão da potência<select id="f-divisao">${opt(info.menu.divisao, sub.politica.divisao)}</select></label>
+      <label class="check"><input type="checkbox" id="f-ponta"${sub.politica.evitar_ponta ? " checked" : ""}> Não carregar na ponta (seg a sex, 18h às 21h)</label>
+    </div></div>
+    <div class="acoes">
+      <button class="bt" id="f-simular">Simular</button>
+      <button class="bt sec" id="f-salvar">Salvar como solução de ${esc(nome)}</button>
+      <span class="status" id="f-status"></span>
+    </div></div>`;
+}
+
+function subForm(nome) {
+  const info = E.dados[nome].agencia, car = {};
+  document.querySelectorAll("[data-car]").forEach(i => { const q = parseInt(i.value, 10); if (q > 0) car[i.dataset.car] = q; });
+  const sub = { agencia: nome, carregadores: car, entrada: $("f-entrada").value };
+  const e = info.entradas.find(x => x.id === sub.entrada);
+  if (e && e.a4 && $("f-demanda").value !== "") sub.demanda_contratada_kw = Number($("f-demanda").value);
+  sub.politica = { prioridade: $("f-prioridade").value, divisao: $("f-divisao").value, evitar_ponta: $("f-ponta").checked };
+  return sub;
+}
+
+function ligarForm(nome) {
+  const info = E.dados[nome].agencia;
+  const atualizar = () => {
+    let s = 0; document.querySelectorAll("[data-car]").forEach(i => s += (parseInt(i.value, 10) || 0) * +i.dataset.saidas);
+    const e = info.entradas.find(x => x.id === $("f-entrada").value);
+    $("f-demanda").disabled = !(e && e.a4);
+    $("saidas").textContent = s > info.vagas ? `${s} saídas para ${info.vagas} vagas: tire carregadores.` : `${s} de ${info.vagas} vagas com saída.`;
+    $("saidas").classList.toggle("excede", s > info.vagas);
+  };
+  document.querySelectorAll("#form input, #form select").forEach(i => i.addEventListener("input", atualizar));
+  atualizar();
+  const status = (t, erro) => { $("f-status").textContent = t; $("f-status").classList.toggle("erro", !!erro); };
+  const ocupado = b => { $("f-simular").disabled = $("f-salvar").disabled = b; };
+  $("f-simular").onclick = async () => {
+    ocupado(true); status("Simulando…");
+    try {
+      const sub = subForm(nome), out = await api("/api/avaliar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(sub) });
+      (E.variantes[nome] = E.variantes[nome] || []).push({ sub, res: out.resultado });
+      E.vista[nome] = E.variantes[nome].length - 1;
+      renderDetalhe();
+      $("detalhe").scrollIntoView({ behavior: "smooth" });
+    } catch (e) { status(e.message, true); ocupado(false); }
+  };
+  $("f-salvar").onclick = async () => {
+    const sub = subForm(nome);
+    if (E.dados[nome].solucao && !confirm(`Substituir a solução salva de ${nome} por esta configuração?`)) return;
+    ocupado(true); status("Salvando…");
+    try {
+      const out = await api("/api/salvar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(sub) });
+      E.dados[nome] = out; E.vista[nome] = null;
+      E.ags.find(a => a.nome === nome).tem_solucao = true;
+      renderLinha(nome); renderTotais(); renderDetalhe();
+      status("Solução salva.");
+    } catch (e) { status(e.message, true); ocupado(false); }
+  };
+  document.querySelectorAll("tr[data-var]").forEach(tr => tr.onclick = () => {
+    E.vista[nome] = tr.dataset.var === "" ? null : +tr.dataset.var;
+    renderDetalhe();
+  });
+}
+
+/* ---------- início ---------- */
+function selecionar(nome) {
+  E.sel = nome;
+  E.ags.forEach(a => renderLinha(a.nome));
+  renderDetalhe();
+}
+
+async function carregar(nome) {
+  E.dados[nome] = { carregando: true };
+  try { E.dados[nome] = await api("/api/avaliar?nome=" + encodeURIComponent(nome)); }
+  catch (e) { E.dados[nome] = { erro: e.message }; }
+  renderLinha(nome); renderTotais();
+  if (E.sel === nome) renderDetalhe();
+}
+
+async function iniciar() {
+  const corpo = document.querySelector("#agencias tbody");
+  try { E.ags = await api("/api/agencias"); }
+  catch (e) { corpo.innerHTML = `<tr><td colspan="8" class="vazio">${esc(e.message)}</td></tr>`; return; }
+  if (!E.ags.length) { corpo.innerHTML = `<tr><td colspan="8" class="vazio">Nenhuma agência em dados/. Baixe o kit de uma agência e descompacte lá.</td></tr>`; return; }
+  corpo.innerHTML = E.ags.map(a => `<tr class="ag" data-ag="${esc(a.nome)}"></tr>`).join("");
+  corpo.querySelectorAll("tr.ag").forEach(tr => tr.onclick = () => selecionar(tr.dataset.ag));
+  const ev = E.ags.reduce((s, a) => s + a.eventos.length, 0);
+  $("meta-topo").textContent = `${E.ags.length} agências, janela pública de 28 dias${ev ? `, ${ev === 1 ? "1 evento ativo" : `${ev} eventos ativos`}` : ""}`;
+  E.sel = (E.ags.find(a => a.tem_solucao) || E.ags[0]).nome;
+  E.ags.forEach(a => renderLinha(a.nome));
+  renderTotais(); renderDetalhe();
+  await Promise.all(E.ags.map(a => carregar(a.nome)));
+}
+
+let redim, largura = 0;
+new ResizeObserver(([e]) => {
+  // redesenha só quando a largura muda (aba em segundo plano mede 0 no primeiro desenho)
+  if (Math.abs(e.contentRect.width - largura) < 1) return;
+  largura = e.contentRect.width;
+  clearTimeout(redim);
+  redim = setTimeout(() => { const v = E.sel && vistaAtual(E.sel); if (v && v.res.valido && $("g-pot")) desenharGraficos(E.sel, v); }, 150);
+}).observe($("detalhe"));
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { E.ags.forEach(a => renderLinha(a.nome)); renderDetalhe(); });
+iniciar();
+</script>
+</body>
+</html>

@@ -4,8 +4,20 @@
     {
       "name": "cliente",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["cliente.py", "--sem-navegador"],
+      "runtimeArgs": [
+        "cliente.py",
+        "--sem-navegador"
+      ],
       "port": 8765
+    },
+    {
+      "name": "painel",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "painel.py",
+        "--sem-navegador"
+      ],
+      "port": 8766
     }
   ]
 }
