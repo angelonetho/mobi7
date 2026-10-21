@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor local</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde-900: #1d4d2b; --verde-700: #2e6b3d; --verde-600: #3a8a4a; --verde-100: #eef6ee; --verde-50: #f5faf5;
+    --texto: #1f2a22; --suave: #5f6b63; --borda: #d5dcd6; --erro: #b3261e; --aviso: #8a6100;
+    --fundo: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fundo); color: var(--texto); font: 16px/1.4 Nunito, system-ui, sans-serif; }
+  main { max-width: 1240px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { display: flex; align-items: center; gap: 12px; font-size: 30px; font-weight: 800; color: var(--verde-900); margin: 0 0 20px; }
+  h1 select { font: inherit; color: inherit; border: none; background: transparent; cursor: pointer; padding: 0; }
+  h2 { font-size: 21px; font-weight: 800; color: var(--verde-700); margin: 0 0 14px; }
+  h3 { font-size: 17px; font-weight: 800; color: var(--texto); margin: 18px 0 8px; }
+  .card { border: 1px solid var(--borda); border-radius: 14px; padding: 22px; margin-bottom: 22px; }
+  .grade { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  @media (max-width: 800px) { .grade { grid-template-columns: 1fr; gap: 12px; } }
+  .linha { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 0; }
+  .linha label { color: var(--suave); }
+  code { background: #eef0ee; border-radius: 6px; padding: 2px 7px; font-size: 14px; color: var(--texto); }
+  input[type=number], select { font: inherit; border: 1px solid var(--borda); border-radius: 10px; padding: 8px 12px; background: #fff; color: var(--texto); }
+  input[type=number] { width: 110px; text-align: right; font-size: 20px; }
+  .campo select, .campo input { width: 100%; }
+  .campo input[type=number] { text-align: left; font-size: 16px; }
+  input:disabled { background: #f0f2f0; color: #9aa39c; }
+  .nota-campo { font-size: 14px; color: var(--suave); margin-top: 6px; }
+  .check { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-weight: 700; }
+  .check input { width: 18px; height: 18px; accent-color: var(--verde-600); }
+  .saidas { margin-top: 10px; color: var(--suave); }
+  .saidas.excede { color: var(--erro); font-weight: 700; }
+  details summary { cursor: pointer; font-weight: 800; color: var(--verde-700); font-size: 19px; margin-top: 18px; }
+  textarea { width: 100%; min-height: 170px; margin-top: 10px; font: 13px/1.5 ui-monospace, Menlo, monospace; border: 1px solid var(--borda); border-radius: 10px; padding: 10px; }
+  .acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+  button { font: inherit; font-weight: 800; font-size: 18px; border: none; border-radius: 10px; padding: 12px 22px; cursor: pointer; background: var(--verde-600); color: #fff; }
+  button.secundario { background: var(--verde-100); color: var(--verde-900); font-size: 15px; padding: 10px 16px; }
+  button:disabled { opacity: .55; cursor: progress; }
+  .status { color: var(--suave); }
+  .erros { color: var(--erro); margin: 12px 0 0; padding-left: 20px; }
+  .aviso { color: var(--aviso); font-size: 14px; margin: 8px 0 0; }
+  .titulo-res { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .titulo-res small { color: var(--suave); font-weight: 700; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+  .kpi { background: var(--verde-50); border-radius: 14px; padding: 16px 18px; }
+  .kpi b { display: block; font-size: 30px; font-weight: 800; color: var(--verde-700); line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .kpi span { font-size: 13px; font-weight: 800; letter-spacing: .04em; color: var(--suave); text-transform: uppercase; }
+  .kpi.ruim b { color: var(--erro); }
+  .grafico-topo { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+  .grafico { position: relative; margin-top: 8px; }
+  canvas { width: 100%; height: 360px; display: block; }
+  .dica { position: absolute; pointer-events: none; background: #fff; border: 1px solid var(--borda); border-radius: 8px; padding: 6px 10px; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,.08); display: none; white-space: nowrap; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--borda); font-variant-numeric: tabular-nums; }
+  th { color: var(--suave); font-weight: 800; }
+  td.num, th.num { text-align: right; }
+  tr.clicavel { cursor: pointer; }
+  tr.clicavel:hover { background: var(--verde-50); }
+  .vazio { color: var(--suave); }
+  .tabela { overflow-x: auto; }
+</style>
+</head>
+<body>
+<main>
+  <section class="card">
+    <h1>⚙︎ Submissão — <select id="agencia" aria-label="Agência"></select></h1>
+    <div class="grade">
+      <div>
+        <h2>Carregadores</h2>
+        <div id="carregadores"></div>
+        <div id="saidas" class="saidas"></div>
+      </div>
+      <div>
+        <h2>Entrada elétrica</h2>
+        <div class="campo">
+          <h3>Entrada</h3>
+          <select id="entrada"></select>
+        </div>
+        <div class="campo">
+          <h3>Demanda contratada (kW)</h3>
+          <input id="demanda" type="number" placeholder="vazio = teto da entrada">
+          <div id="demanda-nota" class="nota-campo"></div>
+        </div>
+        <h2 style="margin-top:22px">Política</h2>
+        <div class="campo"><h3>prioridade</h3><select id="prioridade"></select></div>
+        <div class="campo"><h3>divisao</h3><select id="divisao"></select></div>
+        <label class="check"><input id="evitar_ponta" type="checkbox"> evitar_ponta (seg–sex, 18h–21h sem carga)</label>
+      </div>
+    </div>
+    <details id="det-json">
+      <summary>JSON da submissão</summary>
+      <textarea id="json" spellcheck="false"></textarea>
+      <div class="acoes"><button class="secundario" id="aplicar-json">Aplicar JSON ao formulário</button></div>
+    </details>
+    <div class="acoes">
+      <button id="simular">▶ Simular no motor local</button>
+      <span id="status" class="status"></span>
+    </div>
+    <ul id="erros" class="erros"></ul>
+  </section>
+
+  <section class="card" id="resultado" hidden>
+    <div class="titulo-res"><h2>Resultado</h2><small id="res-sub"></small></div>
+    <div class="kpis" id="kpis"></div>
+    <p class="aviso" id="res-aviso"></p>
+    <h3>Séries de 15 min</h3>
+    <div class="kpis" id="kpis-series"></div>
+    <div class="grafico-topo">
+      <h3 style="margin:0">Gráfico</h3>
+      <select id="serie" aria-label="Série">
+        <option value="potencia_kw">potência (kW)</option>
+        <option value="plugados_max">plugados</option>
+        <option value="fila_max">fila</option>
+      </select>
+    </div>
+    <div class="grafico">
+      <canvas id="canvas"></canvas>
+      <div class="dica" id="dica"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Histórico desta sessão</h2>
+    <p class="nota-campo" style="margin-top:-6px">Clique numa linha para carregar a configuração no formulário.</p>
+    <div class="tabela"><table>
+      <thead><tr><th>#</th><th>Agência</th><th>Carregadores</th><th>Entrada</th><th>Política</th>
+        <th class="num">Nota</th><th class="num">Atend. %</th><th class="num">Perdidos</th><th class="num">Pico kW</th><th class="num">Energia kWh</th><th class="num">Ponta kWh</th></tr></thead>
+      <tbody id="historico"><tr><td colspan="11" class="vazio">Nenhuma simulação ainda.</td></tr></tbody>
+    </table></div>
+  </section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const fmt = (x, casas = 2) => x == null ? "—" : Number(x).toLocaleString("pt-BR", { minimumFractionDigits: 0, maximumFractionDigits: casas });
+const DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+let info = null;          // dados da agência atual
+let ultimo = null;        // último resultado
+const historico = [];
+
+async function api(path, opts) {
+  const r = await fetch(path, opts);
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.erro || r.statusText);
+  return j;
+}
+
+function textoTempo(min) {
+  // minutos desde dom 17/10/2049 00:00
+  const d = new Date(Date.UTC(2049, 9, 17) + min * 60000);
+  const dd = String(d.getUTCDate()).padStart(2, "0"), mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const hh = String(d.getUTCHours()).padStart(2, "0"), mi = String(d.getUTCMinutes()).padStart(2, "0");
+  return { dia: `${DIAS[d.getUTCDay()]} ${dd}/${mm}`, hora: `${hh}:${mi}` };
+}
+
+async function carregarAgencias() {
+  const ags = await api("/api/agencias");
+  if (!ags.length) { $("erros").innerHTML = "<li>Nenhuma agência em dados/. Baixe o kit da agência primeiro.</li>"; return; }
+  $("agencia").innerHTML = ags.map(a => `<option>${a}</option>`).join("");
+  await trocarAgencia();
+}
+
+async function trocarAgencia() {
+  info = await api("/api/agencia?nome=" + encodeURIComponent($("agencia").value));
+  $("carregadores").innerHTML = info.carregadores.map(c => `
+    <div class="linha">
+      <label for="c-${c.id}"><code>${c.id}</code> ${c.tipo} ${fmt(c.potencia_kw)} kW · ${c.saidas} ${c.saidas > 1 ? "saídas" : "saída"}</label>
+      <input type="number" min="0" step="1" value="0" id="c-${c.id}" data-car="${c.id}">
+    </div>`).join("");
+  $("entrada").innerHTML = info.entradas.filter(e => e.permitida).map(e =>
+    `<option value="${e.id}">${e.id} — ${fmt(e.kw_util, 1)} kW úteis${e.id === info.existente ? " (existente, custo 0)" : ""}</option>`).join("");
+  $("entrada").value = info.existente;
+  for (const k of ["prioridade", "divisao"]) $(k).innerHTML = info.menu[k].map(v => `<option>${v}</option>`).join("");
+  $("prioridade").value = "menor_soc"; $("divisao").value = "igual"; $("evitar_ponta").checked = false;
+  $("demanda").value = "";
+  document.querySelectorAll("[data-car]").forEach(i => i.addEventListener("input", atualizar));
+  atualizar();
+}
+
+function entradaAtual() { return info.entradas.find(e => e.id === $("entrada").value); }
+
+function submissao() {
+  const car = {};
+  document.querySelectorAll("[data-car]").forEach(i => { const n = parseInt(i.value, 10); if (n > 0) car[i.dataset.car] = n; });
+  const sub = { agencia: info.nome, carregadores: car, entrada: $("entrada").value };
+  const e = entradaAtual();
+  if (e && e.a4 && $("demanda").value !== "") sub.demanda_contratada_kw = Number($("demanda").value);
+  sub.politica = { prioridade: $("prioridade").value, divisao: $("divisao").value, evitar_ponta: $("evitar_ponta").checked };
+  return sub;
+}
+
+function atualizar() {
+  if (!info) return;
+  const e = entradaAtual();
+  const dem = $("demanda");
+  dem.disabled = !e.a4;
+  if (!e.a4) { dem.value = ""; dem.placeholder = "vazio = entrada inteira"; }
+  else { dem.placeholder = `vazio = teto (${e.teto_demanda} kW)`; dem.min = info.demanda.min; dem.max = e.teto_demanda; dem.step = info.demanda.passo; }
+  $("demanda-nota").textContent = e.a4
+    ? `A4/SE: demanda de ${info.demanda.min} a ${e.teto_demanda} kW, passos de ${info.demanda.passo}. Limite da agência = demanda contratada.`
+    : `B3: sem demanda contratada. Limite da agência = ${fmt(e.kw_util, 1)} kW úteis.`;
+  let saidas = 0;
+  info.carregadores.forEach(c => saidas += (parseInt($("c-" + c.id).value, 10) || 0) * c.saidas);
+  $("saidas").innerHTML = `Saídas: <b>${saidas}</b> de <b>${info.vagas}</b> vagas elétricas`;
+  $("saidas").classList.toggle("excede", saidas > info.vagas);
+  if (document.activeElement !== $("json")) $("json").value = JSON.stringify(submissao(), null, 1);
+}
+
+function aplicarSub(sub) {
+  const aplicar = () => {
+    info.carregadores.forEach(c => $("c-" + c.id).value = (sub.carregadores || {})[c.id] || 0);
+    if (sub.entrada) $("entrada").value = sub.entrada;
+    $("demanda").value = sub.demanda_contratada_kw ?? "";
+    const p = sub.politica || {};
+    $("prioridade").value = p.prioridade || "menor_soc";
+    $("divisao").value = p.divisao || "igual";
+    $("evitar_ponta").checked = !!p.evitar_ponta;
+    atualizar();
+  };
+  if (sub.agencia && sub.agencia !== info.nome) { $("agencia").value = sub.agencia; trocarAgencia().then(aplicar); }
+  else aplicar();
+}
+
+async function simular() {
+  const sub = submissao();
+  $("simular").disabled = true; $("erros").innerHTML = ""; $("status").textContent = "simulando…";
+  const t0 = performance.now();
+  try {
+    const r = await api("/api/simular", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(sub) });
+    $("status").textContent = `pronto em ${fmt((performance.now() - t0) / 1000, 2)} s`;
+    if (!r.valido) { $("erros").innerHTML = r.erros.map(e => `<li>${e}</li>`).join(""); return; }
+    if (r.violacoes && r.violacoes.length) $("erros").innerHTML = r.violacoes.map(v => `<li>violação: ${v}</li>`).join("");
+    ultimo = r; mostrar(r, sub); registrar(r, sub);
+  } catch (e) {
+    $("status").textContent = ""; $("erros").innerHTML = `<li>${e.message}</li>`;
+  } finally { $("simular").disabled = false; }
+}
+
+function kpi(valor, rotulo, ruim) { return `<div class="kpi${ruim ? " ruim" : ""}"><b>${valor}</b><span>${rotulo}</span></div>`; }
+
+function mostrar(r, sub) {
+  const m = r.metricas, s = r.series.publico;
+  $("resultado").hidden = false;
+  $("res-sub").textContent = `motor local · ${r.agencia} · janela ${r.periodo}`;
+  $("kpis").innerHTML = [
+    kpi(r.nota == null ? "—" : fmt(r.nota), "nota"),
+    kpi(fmt(m.contratos, 0), "contratos"),
+    kpi(fmt(m.atendimento_pct), "atendimento_pct", m.atendimento_pct < 100),
+    kpi(fmt(m.pico_kw), "pico_kw"),
+    kpi(fmt(m.energia_kwh), "energia_kwh"),
+    kpi(fmt(m.energia_ponta_kwh), "energia_ponta_kwh"),
+    kpi(fmt(m.certos, 0), "certos"),
+    kpi(fmt(m.upgrades, 0), "upgrades"),
+    kpi(fmt(m.demanda_contratada_kw), "demanda_contratada"),
+    r.custo_infra ? kpi(fmt(r.custo_infra.total), "custo_infra") : "",
+  ].join("");
+  $("res-aviso").textContent = r.aviso || "";
+  $("kpis-series").innerHTML = [
+    kpi(Math.max(0, ...s.plugados_max), "pico plugados"),
+    kpi(Math.max(0, ...s.fila_max), "fila máxima"),
+    kpi(s.nao_atendidos_min.length, "clientes perdidos", s.nao_atendidos_min.length > 0),
+    kpi(s.soc_retirada.length, "retiradas"),
+  ].join("");
+  desenhar();
+}
+
+function registrar(r, sub) {
+  const m = r.metricas;
+  historico.unshift({ sub, m, nota: r.nota });
+  const car = (c) => Object.entries(c).map(([k, n]) => `${n}× ${k}`).join(", ");
+  const pol = (p) => `${p.prioridade} / ${p.divisao}${p.evitar_ponta ? " / evitar_ponta" : ""}`;
+  $("historico").innerHTML = historico.map((h, i) => `
+    <tr class="clicavel" data-i="${i}">
+      <td>${historico.length - i}</td><td>${h.sub.agencia}</td><td>${car(h.sub.carregadores)}</td>
+      <td>${h.sub.entrada}${h.sub.demanda_contratada_kw != null ? ` (${h.sub.demanda_contratada_kw} kW)` : ""}</td>
+      <td>${pol(h.sub.politica)}</td>
+      <td class="num">${h.nota == null ? "—" : fmt(h.nota)}</td><td class="num">${fmt(h.m.atendimento_pct)}</td>
+      <td class="num">${h.m.nao_atendidos}</td><td class="num">${fmt(h.m.pico_kw)}</td>
+      <td class="num">${fmt(h.m.energia_kwh)}</td><td class="num">${fmt(h.m.energia_ponta_kwh)}</td>
+    </tr>`).join("");
+  document.querySelectorAll("#historico tr[data-i]").forEach(tr =>
+    tr.addEventListener("click", () => aplicarSub(historico[+tr.dataset.i].sub)));
+}
+
+// ---------- gráfico (canvas, sem bibliotecas) ----------
+let geo = null;
+function desenhar() {
+  if (!ultimo) return;
+  const s = ultimo.series.publico, chave = $("serie").value, dados = s[chave];
+  const cv = $("canvas"), dpr = window.devicePixelRatio || 1;
+  const W = cv.clientWidth, H = cv.clientHeight;
+  cv.width = W * dpr; cv.height = H * dpr;
+  const g = cv.getContext("2d"); g.scale(dpr, dpr); g.clearRect(0, 0, W, H);
+  const pad = { l: 92, r: 14, t: 30, b: 58 };  // l largo: o 1º rótulo do eixo X é inclinado para a esquerda
+  const limite = chave === "potencia_kw" ? ultimo.limite_kw : null;
+  let ymax = Math.max(1, ...dados, limite || 0);
+  const passo = chave === "potencia_kw" ? (ymax > 100 ? 50 : ymax > 40 ? 10 : 5) : Math.max(1, Math.ceil(ymax / 6));
+  ymax = Math.ceil(ymax * 1.08 / passo) * passo;
+  const x = i => pad.l + (W - pad.l - pad.r) * i / dados.length;
+  const y = v => H - pad.b - (H - pad.t - pad.b) * v / ymax;
+  geo = { pad, W, H, n: dados.length, x, y };
+
+  g.font = "13px Nunito, system-ui, sans-serif"; g.strokeStyle = "#e3e8e4"; g.fillStyle = "#4a554d"; g.lineWidth = 1;
+  g.textAlign = "right"; g.textBaseline = "middle";
+  for (let v = 0; v <= ymax + 1e-9; v += passo) { g.beginPath(); g.moveTo(pad.l, y(v)); g.lineTo(W - pad.r, y(v)); g.stroke(); g.fillText(fmt(v, 0), pad.l - 8, y(v)); }
+  // um rótulo a cada 2 dias (às 18:00, como T0)
+  const porDia = 1440 / s.passo_min;
+  for (let i = 0; i <= dados.length; i += porDia * 2) {
+    g.beginPath(); g.moveTo(x(i), pad.t); g.lineTo(x(i), H - pad.b); g.stroke();
+    const tt = textoTempo(s.inicio_min + i * s.passo_min);
+    g.save(); g.translate(x(i), H - pad.b + 12); g.rotate(-Math.PI / 9); g.textAlign = "right"; g.textBaseline = "top";
+    g.fillText(`${tt.dia.split(" ")[0]} ${tt.dia.split(" ")[1].slice(0, 2)} ${tt.hora}`, 0, 0); g.restore();
+  }
+  // área + linha (degraus)
+  g.beginPath(); g.moveTo(x(0), y(0));
+  dados.forEach((v, i) => { g.lineTo(x(i), y(v)); g.lineTo(x(i + 1), y(v)); });
+  g.lineTo(x(dados.length), y(0)); g.closePath();
+  g.fillStyle = "rgba(58,138,74,.18)"; g.fill();
+  g.beginPath(); dados.forEach((v, i) => { i ? g.lineTo(x(i), y(v)) : g.moveTo(x(i), y(v)); g.lineTo(x(i + 1), y(v)); });
+  g.strokeStyle = "#3a8a4a"; g.lineWidth = 1.5; g.stroke();
+  if (limite != null) {
+    g.setLineDash([7, 5]); g.strokeStyle = "#1d4d2b"; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(pad.l, y(limite)); g.lineTo(W - pad.r, y(limite)); g.stroke(); g.setLineDash([]);
+  }
+  // legenda
+  g.textAlign = "left"; g.textBaseline = "middle"; g.fillStyle = "#4a554d";
+  const nome = $("serie").selectedOptions[0].textContent;
+  g.fillStyle = "rgba(58,138,74,.25)"; g.fillRect(W / 2 - 150, 8, 30, 14); g.strokeStyle = "#3a8a4a"; g.lineWidth = 1; g.strokeRect(W / 2 - 150, 8, 30, 14);
+  g.fillStyle = "#4a554d"; g.fillText(nome, W / 2 - 112, 15);
+  if (limite != null) {
+    g.setLineDash([5, 4]); g.strokeStyle = "#1d4d2b"; g.strokeRect(W / 2 + 20, 8, 30, 14); g.setLineDash([]);
+    g.fillText(`limite (${fmt(limite, 1)} kW)`, W / 2 + 58, 15);
+  }
+}
+
+$("canvas").addEventListener("mousemove", ev => {
+  if (!geo || !ultimo) return;
+  const r = ev.target.getBoundingClientRect(), mx = ev.clientX - r.left;
+  const i = Math.floor((mx - geo.pad.l) / ((geo.W - geo.pad.l - geo.pad.r) / geo.n));
+  const dica = $("dica");
+  if (i < 0 || i >= geo.n) { dica.style.display = "none"; return; }
+  const s = ultimo.series.publico, tt = textoTempo(s.inicio_min + i * s.passo_min);
+  dica.innerHTML = `<b>${tt.dia} ${tt.hora}</b><br>potência ${fmt(s.potencia_kw[i])} kW · plugados ${s.plugados_max[i]} · fila ${s.fila_max[i]}`;
+  dica.style.display = "block";
+  dica.style.left = Math.min(mx + 12, geo.W - dica.offsetWidth - 4) + "px";
+  dica.style.top = "6px";
+});
+$("canvas").addEventListener("mouseleave", () => $("dica").style.display = "none");
+
+$("agencia").addEventListener("change", () => trocarAgencia().catch(e => $("erros").innerHTML = `<li>${e.message}</li>`));
+["entrada", "demanda", "prioridade", "divisao", "evitar_ponta"].forEach(id => $(id).addEventListener("input", atualizar));
+$("simular").addEventListener("click", simular);
+$("serie").addEventListener("change", desenhar);
+$("aplicar-json").addEventListener("click", () => {
+  try { aplicarSub(JSON.parse($("json").value)); $("erros").innerHTML = ""; }
+  catch (e) { $("erros").innerHTML = `<li>JSON inválido: ${e.message}</li>`; }
+});
+window.addEventListener("resize", desenhar);
+carregarAgencias().catch(e => $("erros").innerHTML = `<li>${e.message}</li>`);
+</script>
+</body>
+</html>
