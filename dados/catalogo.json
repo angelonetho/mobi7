@@ -108,6 +108,22 @@
    "demanda_contratada": -2,
    "energia_ponta_kwh": -0.5,
    "infraestrutura": -1
+  },
+  "Vienna": {
+   "certo": 15,
+   "upgrade": 8,
+   "nao_atendido": -200,
+   "demanda_contratada": -2,
+   "energia_ponta_kwh": -0.5,
+   "infraestrutura": -1
+  },
+  "Lisbon": {
+   "certo": 15,
+   "upgrade": 8,
+   "nao_atendido": -200,
+   "demanda_contratada": -2,
+   "energia_ponta_kwh": -0.5,
+   "infraestrutura": -1
   }
  }
 }

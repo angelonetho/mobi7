@@ -1,0 +1,326 @@
+id,modelo,categoria,situacao,soc_pct,devolucao_prevista,soc_devolucao_pct
+V00004,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-31T06:13:00,21.0
+V00016,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-21T06:07:00,55.0
+V00017,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-25T12:23:00,58.9
+V00023,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-19T13:55:00,10.1
+V00028,Geely EX2 Pro,Prata,em_contrato,,2049-10-21T10:14:00,55.8
+V00034,JAC E-JS1,Bronze,em_contrato,,2049-10-20T06:15:00,5.8
+V00038,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T21:47:00,49.0
+V00046,BYD Dolphin Mini GS,Prata,estoque_a_carregar,6.3,,
+V00050,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T06:14:00,12.1
+V00057,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T19:14:00,55.3
+V00059,MG4 Urban Comfort,Ouro,estoque_pronto,80.0,,
+V00074,Geely EX2 Pro,Prata,em_contrato,,2049-10-22T17:41:00,10.4
+V00077,Geely EX2 Pro,Prata,em_contrato,,2049-10-24T15:46:00,12.8
+V00082,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T12:07:00,14.7
+V00086,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-20T20:30:00,5.2
+V00088,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-17T21:37:00,20.8
+V00092,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V00098,JAC E-JS1,Bronze,estoque_pronto,80.0,,
+V00110,Geely EX2 Pro,Prata,estoque_a_carregar,19.9,,
+V00125,BYD Dolphin Plus,Diamante,estoque_a_carregar,30.0,,
+V00128,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T11:22:00,53.9
+V00142,Geely EX2 Pro,Prata,em_contrato,,2049-11-03T22:18:00,19.6
+V00149,MG4 Urban Comfort,Ouro,em_contrato,,2049-11-15T06:14:00,60.9
+V00161,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T19:22:00,12.6
+V00171,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-22T06:02:00,6.0
+V00174,Renault Kwid E-Tech,Bronze,em_contrato,,2049-11-07T07:20:00,61.9
+V00178,MG4 Urban Comfort,Ouro,em_contrato,,2049-11-01T14:13:00,31.9
+V00180,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T06:23:00,15.5
+V00184,BYD Dolphin GS,Ouro,em_contrato,,2049-11-15T06:10:00,11.1
+V00198,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-24T18:08:00,8.0
+V00199,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T20:26:00,71.6
+V00200,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T09:31:00,39.8
+V00201,JAC E-JS1,Bronze,estoque_a_carregar,8.9,,
+V00205,BYD Dolphin GS,Ouro,em_contrato,,2049-10-17T21:58:00,28.4
+V00207,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-17T18:29:00,60.6
+V00220,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V00227,Geely EX2 Pro,Prata,em_contrato,,2049-11-01T11:27:00,13.8
+V00231,BYD Dolphin GS,Ouro,estoque_a_carregar,65.9,,
+V00233,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-20T17:00:00,74.3
+V00234,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T09:46:00,32.1
+V00245,Geely EX2 Pro,Prata,em_contrato,,2049-11-04T11:47:00,57.9
+V00246,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V00248,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-21T18:16:00,40.4
+V00261,BYD Dolphin GS,Ouro,em_contrato,,2049-11-05T16:17:00,64.1
+V00264,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-26T08:27:00,10.7
+V00267,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T23:22:00,9.8
+V00273,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-30T14:28:00,52.7
+V00278,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-21T06:08:00,3.0
+V00284,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-18T17:09:00,49.9
+V00288,Renault Kwid E-Tech,Bronze,em_contrato,,2049-11-02T08:47:00,8.5
+V00289,BYD Dolphin GS,Ouro,em_contrato,,2049-10-30T11:48:00,10.2
+V00293,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-30T06:13:00,15.8
+V00310,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-20T06:04:00,53.0
+V00311,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-23T11:34:00,26.9
+V00312,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T10:03:00,41.1
+V00313,Leapmotor B10 BEV,Diamante,em_contrato,,2049-11-07T15:09:00,24.2
+V00323,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-25T23:44:00,69.1
+V00338,Leapmotor B10 BEV,Diamante,estoque_a_carregar,4.5,,
+V00357,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T09:22:00,5.6
+V00358,Geely EX2 Pro,Prata,em_contrato,,2049-11-02T17:51:00,21.6
+V00369,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-19T14:55:00,43.9
+V00376,Geely EX2 Pro,Prata,em_contrato,,2049-10-30T19:26:00,61.9
+V00378,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T06:13:00,31.5
+V00383,Geely EX2 Pro,Prata,estoque_pronto,80.0,,
+V00384,Geely EX2 Pro,Prata,em_contrato,,2049-11-12T18:15:00,46.6
+V00392,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V00396,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-19T16:32:00,67.5
+V00401,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T15:58:00,4.6
+V00403,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T12:03:00,8.7
+V00406,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-27T07:07:00,7.9
+V00426,Geely EX2 Pro,Prata,em_contrato,,2049-11-04T17:31:00,58.7
+V00429,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-19T06:13:00,9.9
+V00435,BYD Dolphin GS,Ouro,em_contrato,,2049-10-20T16:01:00,8.2
+V00436,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T12:31:00,8.2
+V00438,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T14:07:00,3.0
+V00448,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T18:34:00,9.6
+V00457,Geely EX2 Pro,Prata,em_contrato,,2049-11-10T06:13:00,59.9
+V00463,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-27T20:33:00,9.8
+V00464,MG4 Urban Comfort,Ouro,em_contrato,,2049-11-03T15:00:00,48.6
+V00468,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-23T12:34:00,61.2
+V00469,Geely EX2 Pro,Prata,em_contrato,,2049-10-25T17:54:00,24.3
+V00470,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T17:26:00,28.2
+V00478,BYD Dolphin Plus,Diamante,em_contrato,,2049-11-07T06:32:00,7.7
+V00479,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T17:37:00,12.8
+V00491,Renault Kwid E-Tech,Bronze,em_contrato,,2049-11-11T17:53:00,5.0
+V00492,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V00495,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T06:12:00,14.0
+V00501,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-19T17:51:00,41.7
+V00524,BYD Dolphin Mini GS,Prata,estoque_a_carregar,58.4,,
+V00528,Geely EX2 Pro,Prata,em_contrato,,2049-10-23T11:39:00,7.5
+V00530,JAC E-JS1,Bronze,em_contrato,,2049-10-20T06:06:00,16.0
+V00538,Geely EX2 Pro,Prata,em_contrato,,2049-10-28T06:06:00,35.2
+V00540,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-30T06:08:00,10.1
+V00546,BYD Dolphin GS,Ouro,em_contrato,,2049-10-22T08:54:00,65.9
+V00550,Renault Kwid E-Tech,Bronze,estoque_a_carregar,3.0,,
+V00552,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-26T06:12:00,53.2
+V00556,JAC E-JS1,Bronze,em_contrato,,2049-10-19T06:04:00,40.9
+V00561,JAC E-JS1,Bronze,em_contrato,,2049-10-28T07:56:00,60.8
+V00565,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V00568,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-23T06:04:00,34.3
+V00579,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-18T06:01:00,3.0
+V00581,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V00584,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-07T19:23:00,21.3
+V00596,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-02T17:02:00,13.4
+V00615,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-17T23:39:00,7.1
+V00617,JAC E-JS1,Bronze,em_contrato,,2049-11-24T21:40:00,31.8
+V00631,MG4 Urban Comfort,Ouro,em_contrato,,2049-11-02T11:04:00,6.5
+V00642,JAC E-JS1,Bronze,em_contrato,,2049-10-18T15:45:00,12.9
+V00643,Geely EX2 Pro,Prata,em_contrato,,2049-10-17T19:07:00,3.5
+V00654,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-19T06:11:00,11.9
+V00661,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T06:12:00,42.6
+V00664,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-26T13:30:00,55.5
+V00666,Leapmotor B10 BEV,Diamante,estoque_a_carregar,52.2,,
+V00667,Geely EX2 Pro,Prata,em_contrato,,2049-10-27T06:03:00,4.3
+V00669,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-20T06:11:00,10.1
+V00677,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T14:41:00,37.2
+V00679,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T06:05:00,12.3
+V00689,BYD Dolphin GS,Ouro,estoque_a_carregar,46.6,,
+V00698,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T12:21:00,21.9
+V00699,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T07:41:00,58.9
+V00706,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-25T10:20:00,75.0
+V00713,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-17T18:54:00,13.1
+V00714,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T07:07:00,4.8
+V00717,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T06:14:00,36.8
+V00728,BYD Dolphin GS,Ouro,em_contrato,,2049-10-20T06:09:00,41.0
+V00734,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T15:09:00,6.9
+V00739,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T06:04:00,67.5
+V00744,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-17T21:26:00,30.2
+V00752,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T15:52:00,61.9
+V00760,BYD Dolphin GS,Ouro,em_contrato,,2049-10-27T16:14:00,36.6
+V00776,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-01T06:22:00,21.3
+V00784,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-24T23:09:00,10.9
+V00787,JAC E-JS1,Bronze,em_contrato,,2049-10-18T06:13:00,20.3
+V00794,BYD Dolphin GS,Ouro,estoque_a_carregar,57.2,,
+V00795,Geely EX2 Pro,Prata,em_contrato,,2049-10-27T23:23:00,9.2
+V00810,Leapmotor B10 BEV,Diamante,em_contrato,,2049-11-03T06:13:00,25.6
+V00833,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-29T09:37:00,8.5
+V00836,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T14:36:00,9.0
+V00844,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T06:06:00,50.9
+V00847,Leapmotor B10 BEV,Diamante,estoque_a_carregar,42.2,,
+V00854,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T10:47:00,5.4
+V00871,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T22:21:00,47.7
+V00875,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T16:46:00,7.3
+V00879,BYD Dolphin GS,Ouro,em_contrato,,2049-11-09T10:32:00,6.7
+V00880,BYD Dolphin GS,Ouro,em_contrato,,2049-10-30T21:33:00,50.4
+V00882,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T11:15:00,43.7
+V00894,JAC E-JS1,Bronze,em_contrato,,2049-10-17T19:39:00,6.2
+V00900,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-22T08:16:00,40.3
+V00904,Geely EX2 Pro,Prata,em_contrato,,2049-10-24T06:06:00,6.9
+V00909,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T06:04:00,18.0
+V00911,BYD Dolphin GS,Ouro,em_contrato,,2049-11-08T06:05:00,57.7
+V00916,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T23:52:00,12.5
+V00927,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T16:33:00,37.3
+V00929,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-06T14:05:00,50.1
+V00930,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T08:36:00,38.1
+V00941,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T13:10:00,53.6
+V00946,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-16T09:24:00,57.7
+V00948,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-30T06:06:00,61.1
+V00955,Geely EX2 Pro,Prata,em_contrato,,2049-10-30T09:07:00,7.9
+V00956,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V00959,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-17T20:54:00,35.9
+V00964,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T17:26:00,41.4
+V00966,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T06:11:00,53.7
+V00967,Geely EX2 Pro,Prata,em_contrato,,2049-10-29T07:12:00,48.2
+V00978,BYD Dolphin GS,Ouro,em_contrato,,2049-10-24T06:04:00,3.0
+V00979,MG4 Urban Comfort,Ouro,estoque_a_carregar,5.9,,
+V00985,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-29T21:16:00,5.2
+V00988,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-09T06:11:00,36.6
+V01008,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-21T14:07:00,36.8
+V01015,Leapmotor B10 BEV,Diamante,em_contrato,,2049-11-07T07:05:00,56.2
+V01028,JAC E-JS1,Bronze,em_contrato,,2049-11-12T13:53:00,40.7
+V01031,Leapmotor B10 BEV,Diamante,em_contrato,,2049-11-02T14:39:00,39.2
+V01032,JAC E-JS1,Bronze,em_contrato,,2049-10-22T06:07:00,12.6
+V01035,Geely EX2 Pro,Prata,estoque_a_carregar,50.3,,
+V01036,MG4 Urban Comfort,Ouro,estoque_pronto,80.0,,
+V01047,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-21T06:12:00,53.0
+V01058,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T10:27:00,46.8
+V01059,Geely EX2 Pro,Prata,em_contrato,,2049-10-21T18:35:00,5.1
+V01062,BYD Dolphin Plus,Diamante,em_contrato,,2049-11-18T18:27:00,4.4
+V01070,BYD Dolphin GS,Ouro,em_contrato,,2049-11-01T06:13:00,5.7
+V01071,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T18:45:00,10.8
+V01072,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-21T14:48:00,30.5
+V01073,BYD Dolphin Plus,Diamante,estoque_a_carregar,47.5,,
+V01092,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T20:02:00,10.9
+V01093,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T11:21:00,53.9
+V01098,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-18T07:12:00,59.3
+V01103,JAC E-JS1,Bronze,estoque_a_carregar,63.0,,
+V01112,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V01113,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T07:53:00,14.2
+V01116,Renault Kwid E-Tech,Bronze,em_contrato,,2049-11-02T06:24:00,31.9
+V01121,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V01139,BYD Dolphin GS,Ouro,estoque_a_carregar,12.7,,
+V01147,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T06:03:00,15.8
+V01158,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-10T06:15:00,34.8
+V01163,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-20T21:05:00,74.2
+V01164,Geely EX2 Pro,Prata,em_contrato,,2049-10-24T06:01:00,10.6
+V01170,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T20:31:00,55.4
+V01173,BYD Dolphin Plus,Diamante,estoque_a_carregar,29.6,,
+V01176,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-01T20:29:00,6.5
+V01178,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-24T06:10:00,53.9
+V01179,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-19T14:43:00,43.5
+V01183,BYD Dolphin GS,Ouro,em_contrato,,2049-11-15T06:03:00,5.4
+V01188,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-22T22:56:00,55.0
+V01198,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-19T06:11:00,40.9
+V01200,BYD Dolphin GS,Ouro,em_contrato,,2049-11-20T16:56:00,68.7
+V01201,Geely EX2 Pro,Prata,em_contrato,,2049-10-20T23:46:00,42.7
+V01207,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-26T06:05:00,25.5
+V01211,BYD Dolphin GS,Ouro,em_contrato,,2049-10-26T06:14:00,5.4
+V01217,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-20T06:03:00,42.9
+V01223,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-21T10:12:00,54.9
+V01230,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-19T06:15:00,15.6
+V01239,BYD Dolphin GS,Ouro,em_contrato,,2049-10-21T09:25:00,47.5
+V01243,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V01245,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T15:54:00,30.9
+V01251,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V01257,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-31T19:51:00,11.9
+V01262,BYD Dolphin Plus,Diamante,em_contrato,,2049-11-07T10:46:00,13.1
+V01264,BYD Dolphin Plus,Diamante,estoque_a_carregar,32.7,,
+V01270,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-22T06:02:00,18.3
+V01275,BYD Dolphin GS,Ouro,estoque_a_carregar,31.8,,
+V01283,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T20:41:00,10.4
+V01284,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-25T08:20:00,36.9
+V01285,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-19T17:24:00,19.9
+V01293,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T13:25:00,5.5
+V01303,Geely EX2 Pro,Prata,em_contrato,,2049-11-07T06:54:00,27.3
+V01314,JAC E-JS1,Bronze,em_contrato,,2049-11-05T13:45:00,68.0
+V01332,BYD Dolphin Mini GS,Prata,estoque_a_carregar,9.1,,
+V01333,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T22:47:00,57.1
+V01335,Renault Kwid E-Tech,Bronze,em_contrato,,2049-11-04T13:03:00,62.0
+V01337,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-20T15:43:00,41.3
+V01338,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T12:12:00,7.3
+V01354,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T19:15:00,65.1
+V01375,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T06:18:00,12.4
+V01393,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T19:14:00,39.3
+V01395,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-21T22:20:00,28.8
+V01396,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-17T22:30:00,26.3
+V01410,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-19T06:13:00,24.8
+V01414,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-24T21:06:00,58.6
+V01419,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-30T06:05:00,4.1
+V01434,BYD Dolphin GS,Ouro,em_contrato,,2049-10-20T13:44:00,48.8
+V01435,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T12:49:00,31.0
+V01457,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T21:39:00,3.0
+V01462,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-18T22:10:00,9.2
+V01471,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T15:51:00,10.8
+V01483,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T06:06:00,44.2
+V01490,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-19T06:03:00,31.0
+V01498,BYD Dolphin GS,Ouro,em_contrato,,2049-10-27T11:59:00,54.8
+V01506,Leapmotor B10 BEV,Diamante,em_contrato,,2049-11-01T09:01:00,29.1
+V01509,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-23T06:01:00,33.4
+V01512,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V01516,BYD Dolphin Plus,Diamante,em_contrato,,2049-11-04T10:41:00,7.6
+V01521,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T13:01:00,12.1
+V01524,Leapmotor B10 BEV,Diamante,estoque_pronto,80.0,,
+V01527,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T06:03:00,38.7
+V01528,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T23:25:00,36.1
+V01535,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-12T07:45:00,4.3
+V01548,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-18T17:30:00,10.5
+V01549,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T16:11:00,9.2
+V01557,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-19T06:07:00,52.8
+V01561,JAC E-JS1,Bronze,estoque_a_carregar,22.2,,
+V01589,Geely EX2 Pro,Prata,em_contrato,,2049-10-20T15:34:00,29.0
+V01591,JAC E-JS1,Bronze,em_contrato,,2049-10-20T15:28:00,23.1
+V01592,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-06T21:56:00,24.7
+V01600,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T10:23:00,38.4
+V01607,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-31T23:30:00,8.4
+V01611,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-26T21:46:00,37.6
+V01614,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-19T16:57:00,5.0
+V01615,Geely EX2 Pro,Prata,em_contrato,,2049-10-20T11:19:00,29.6
+V01618,Leapmotor B10 BEV,Diamante,estoque_a_carregar,51.7,,
+V01643,Geely EX2 Pro,Prata,em_contrato,,2049-10-24T23:20:00,71.2
+V01645,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-18T17:09:00,9.1
+V01673,MG4 Urban Comfort,Ouro,em_contrato,,2049-11-08T21:29:00,47.8
+V01675,JAC E-JS1,Bronze,em_contrato,,2049-10-19T18:21:00,10.5
+V01682,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T09:37:00,8.3
+V01685,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-27T16:36:00,6.9
+V01690,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T07:04:00,17.2
+V01691,BYD Dolphin GS,Ouro,em_contrato,,2049-10-23T06:01:00,7.0
+V01696,BYD Dolphin GS,Ouro,em_contrato,,2049-10-21T06:07:00,9.3
+V01697,Geely EX2 Pro,Prata,em_contrato,,2049-10-21T06:10:00,8.8
+V01698,Geely EX2 Pro,Prata,em_contrato,,2049-10-19T06:01:00,3.0
+V01700,Geely EX2 Pro,Prata,em_contrato,,2049-10-23T18:28:00,38.8
+V01705,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-18T22:05:00,21.2
+V01712,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T07:16:00,4.2
+V01723,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T06:10:00,7.2
+V01734,Geely EX2 Pro,Prata,em_contrato,,2049-10-21T13:38:00,60.7
+V01741,Geely EX2 Pro,Prata,em_contrato,,2049-10-29T08:36:00,35.1
+V01744,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T06:07:00,3.0
+V01750,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V01751,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V01752,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-28T22:31:00,62.0
+V01753,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-26T11:38:00,17.2
+V01783,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-23T11:21:00,48.2
+V01789,BYD Dolphin Mini GS,Prata,em_contrato,,2049-11-03T13:19:00,5.7
+V01791,Geely EX2 Pro,Prata,em_contrato,,2049-10-22T09:10:00,53.0
+V01794,Geely EX2 Pro,Prata,estoque_pronto,80.0,,
+V01802,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-17T23:47:00,7.9
+V01814,BYD Dolphin GS,Ouro,em_contrato,,2049-10-20T13:24:00,52.4
+V01817,BYD Dolphin GS,Ouro,estoque_pronto,80.0,,
+V01825,BYD Dolphin Mini GS,Prata,estoque_a_carregar,36.6,,
+V01832,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-24T14:40:00,4.9
+V01835,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-17T21:27:00,3.6
+V01836,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T16:58:00,47.2
+V01845,JAC E-JS1,Bronze,estoque_a_carregar,44.0,,
+V01846,Leapmotor B10 BEV,Diamante,em_contrato,,2049-11-02T18:42:00,36.3
+V01852,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-18T16:10:00,58.9
+V01863,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-24T16:05:00,6.3
+V01869,BYD Dolphin GS,Ouro,em_contrato,,2049-10-19T06:36:00,25.0
+V01871,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T06:08:00,43.2
+V01876,MG4 Urban Comfort,Ouro,estoque_pronto,80.0,,
+V01877,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-21T08:54:00,24.8
+V01881,BYD Dolphin Mini GS,Prata,estoque_pronto,80.0,,
+V01890,Leapmotor B10 BEV,Diamante,em_contrato,,2049-10-19T18:36:00,31.8
+V01906,Geely EX2 Pro,Prata,em_contrato,,2049-10-17T18:24:00,25.1
+V01911,Geely EX2 Pro,Prata,em_contrato,,2049-10-27T10:32:00,7.6
+V01919,BYD Dolphin Mini GS,Prata,em_contrato,,2049-10-20T06:04:00,36.3
+V01921,Renault Kwid E-Tech,Bronze,em_contrato,,2049-10-18T06:11:00,44.2
+V01923,BYD Dolphin Plus,Diamante,em_contrato,,2049-10-18T22:28:00,9.0
+V01936,Renault Kwid E-Tech,Bronze,em_contrato,,2049-11-09T06:07:00,10.2
+V01937,JAC E-JS1,Bronze,em_contrato,,2049-10-21T17:59:00,34.0
+V01941,BYD Dolphin GS,Ouro,em_contrato,,2049-10-18T10:17:00,3.0
+V01951,Geely EX2 Pro,Prata,em_contrato,,2049-11-06T13:38:00,8.9
+V01955,MG4 Urban Comfort,Ouro,em_contrato,,2049-10-24T17:36:00,49.6
+V01967,JAC E-JS1,Bronze,em_contrato,,2049-10-22T06:11:00,52.7
+V01972,Geely EX2 Pro,Prata,em_contrato,,2049-10-18T18:59:00,52.2
+V01973,Geely EX2 Pro,Prata,em_contrato,,2049-11-10T10:03:00,8.2
