@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Credenciais (GAMEDAY_TOKEN etc.)
+.env
+.env.*
+
+# Claude Code (configurações locais)
+.claude/settings.local.json
+
+# Dados das agências e catálogo (baixar com `python -m kickoff.api kit <Agencia>`)
+dados/*/
+dados/catalogo.json
+
+# Respostas salvas do juiz
+resp*.json
