@@ -96,6 +96,7 @@ class Devolucao(unittest.TestCase):
         m.montado = True
         v = carro(m, "geely", "Geely EX2 Pro", 90.0)
         m.patio.clear()
+        m.aberta = False  # fechada: fica na fila, sem plugar
         m.on_devolucao("geely", 50.0, 2000)
         self.assertTrue(v.na_fila)
         self.assertEqual(v.entrou_fila_t, 2000)
