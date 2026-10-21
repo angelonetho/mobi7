@@ -143,8 +143,12 @@ let info = null;          // dados da agência atual
 let ultimo = null;        // último resultado
 const historico = [];
 
+const SEM_SERVIDOR = "Servidor do cliente não está rodando. No terminal, na pasta do kit, rode: python3 cliente.py (e abra o endereço que ele mostrar).";
+
 async function api(path, opts) {
-  const r = await fetch(path, opts);
+  if (location.protocol === "file:") throw new Error(SEM_SERVIDOR);
+  let r;
+  try { r = await fetch(path, opts); } catch { throw new Error(SEM_SERVIDOR); }
   const j = await r.json();
   if (!r.ok) throw new Error(j.erro || r.statusText);
   return j;
