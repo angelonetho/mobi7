@@ -461,15 +461,25 @@ class Motor:
         # último passo de _agendar_inicio: a frota de T0 já está no pátio, pluga a fila de uma vez
         self.montado = True
         self.plugar_fila(tempo.T0)
-        # TODO(etapa 7)
+        self.limite_base = self.limite_kw
+        for params in eventos:
+            if params[0] == "corte":
+                # ["corte", agência, início, fim, fator]: limite da agência × fator em [início, fim)
+                _, _, ini, fim, fator = params
+                self.agendar(ini, PRIO_ABERTURA, "evento", "corte", float(fator))
+                self.agendar(fim, PRIO_ABERTURA, "evento", "corte", 1.0)
+            else:
+                raise ValueError(f"evento desconhecido: {params!r}")
 
     def on_evento(self, t: float, *params) -> None:
         """Aplica um evento no instante t (ex.: limite da concessionária, carregador fora de operação).
 
         Recalcule as potências; ao voltar um carregador, tente plugar a fila (6.3.3).
         """
-        # TODO(etapa 7)
-        pass
+        tipo, *resto = params
+        if tipo == "corte":
+            self.limite_kw = self.limite_base * resto[0]
+        self.recalcular_potencias(t)
 
 
 def simular(cenario: Cenario, sub_normalizada: dict, eventos=()) -> Resultado:
