@@ -1,0 +1,12 @@
+{
+ "agencia": "Bangkok",
+ "carregadores": {
+  "ac_7": 2
+ },
+ "entrada": "b3_45",
+ "politica": {
+  "prioridade": "menor_soc",
+  "divisao": "igual",
+  "evitar_ponta": false
+ }
+}
