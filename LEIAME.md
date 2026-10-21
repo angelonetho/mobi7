@@ -30,6 +30,7 @@ Bangkok é a agência tutorial: testes grátis (0 m7Coins, cooldown de 1 min) e 
 |---|---|---|
 | `simular.py` | Simula submissões na janela pública com o seu motor. Opções: `--dados`, `--catalogo`, `--eventos`, `--series` | pronto |
 | `painel.py` | Painel web (http://localhost:8766): simula a solução de cada agência (`solucoes/<Agencia>.json`), mostra nota, atendimento, custo e séries, compara variações e salva a melhor | pronto |
+| `otimizar.py` | Busca local da melhor solução de uma agência com o motor local (`python3 otimizar.py AG --salvar` grava em `solucoes/`) | pronto |
 | `comparar.py` | Compara o seu motor com a resposta salva de `POST /teste` e aponta a primeira janela divergente | pronto |
 | `exemplo_submissao.json` | Submissão de exemplo para Bangkok | pronto |
 | `dados/` | Onde ficam os kits das agências (e `catalogo.json`) | vazio, vocês preenchem |
