@@ -414,15 +414,18 @@ class Motor:
 
         Desplugue quem está parado no alvo (80%) segurando saída, depois `plugar_fila`.
         """
-        # TODO(etapa 5)
         self.aberta = True
+        for p in self.pontos:
+            for v in list(p.conectados):
+                if v.soc >= v.alvo - EPS:
+                    self.desplugar(v)
+        self.plugar_fila(t)
 
     def on_fechamento(self, t: float) -> None:
         """Agência fecha: ninguém retira nem pluga/despluga; a recarga continua (5.2).
 
         Quem atinge 80% com a agência fechada segura a saída até a abertura.
         """
-        # TODO(etapa 5)
         self.aberta = False
 
     def on_ponta(self, inicio: bool, t: float) -> None:
@@ -430,8 +433,8 @@ class Motor:
 
         Na ponta todos a 0 kW, continuam plugados e plugar continua permitido. Recalcule as potências.
         """
-        # TODO(etapa 5)
         self.em_ponta = inicio
+        self.recalcular_potencias(t)
 
     def agendar_eventos(self, eventos) -> None:
         """Agenda os eventos ao vivo (seção 11). `eventos`: lista de `params` (minutos desde 17/10/2049 00:00).
