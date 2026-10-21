@@ -6,7 +6,9 @@ marcados com `# TODO(etapa N)`: sem implementá-los, todo cliente é perdido (at
 Ordem no mesmo minuto (regulamento 5.1): devolução -> abertura/ponta/eventos -> fim de recarga
 -> retirada -> fechamento (constantes PRIO_*).
 """
+import bisect
 import heapq
+import math
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -290,7 +292,21 @@ class Motor:
         """Chave de ordenação da `prioridade` (6.3.3); vale para a fila e para `divisao: prioridade`."""
         if self.pol["prioridade"] == "chegada":
             return lambda v: (v.entrou_fila_t, v.id)
-        # TODO(etapa 6): as três prioridades
+        if self.pol["prioridade"] == "proxima_retirada":
+            # primeira retirada ainda não feita (no mesmo minuto a retirada vem depois) com categoria <= a do carro
+            contratos = self.cen.contratos  # já em ordem de (retirada_t, id)
+            ranks = sorted(set(self.cen.categorias.values()) | {v.rank for v in self.veiculos.values()})
+            prox = {}
+            if not hasattr(self, "retirada_ts"):
+                self.retirada_ts = [c.retirada_t for c in contratos]
+            i = bisect.bisect_left(self.retirada_ts, t)
+            for c in contratos[i:]:
+                for r in ranks:
+                    if r >= c.rank:
+                        prox.setdefault(r, c.retirada_t)
+                if len(prox) == len(ranks):
+                    break
+            return lambda v: (prox.get(v.rank, math.inf), -v.soc, v.id)
         return lambda v: (v.modelo.autonomia_km * v.soc / 100.0, v.id)
 
     def escolher_ponto(self, v: Veiculo) -> Optional[Ponto]:
