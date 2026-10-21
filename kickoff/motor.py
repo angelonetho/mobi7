@@ -468,6 +468,12 @@ class Motor:
                 _, _, ini, fim, fator = params
                 self.agendar(ini, PRIO_ABERTURA, "evento", "corte", float(fator))
                 self.agendar(fim, PRIO_ABERTURA, "evento", "corte", 1.0)
+            elif params[0] == "quebra_maiores":
+                # ["quebra_maiores", agência, n, início, fim]: os n carregadores de maior potência param em
+                # [início, fim); empate pela ordem de self.pontos (6.3.4)
+                _, _, n, ini, fim = params
+                self.agendar(ini, PRIO_ABERTURA, "evento", "quebra_maiores", int(n), True)
+                self.agendar(fim, PRIO_ABERTURA, "evento", "quebra_maiores", int(n), False)
             else:
                 raise ValueError(f"evento desconhecido: {params!r}")
 
@@ -479,6 +485,14 @@ class Motor:
         tipo, *resto = params
         if tipo == "corte":
             self.limite_kw = self.limite_base * resto[0]
+        elif tipo == "quebra_maiores":
+            n, quebra = resto
+            maiores = sorted(range(len(self.pontos)), key=lambda i: (-self.pontos[i].modelo.potencia_kw, i))[:n]
+            for i in maiores:
+                self.pontos[i].quebrado = quebra
+            if not quebra:
+                self.plugar_fila(t)  # carregador voltou: tenta plugar a fila (6.3.3)
+                return
         self.recalcular_potencias(t)
 
 
