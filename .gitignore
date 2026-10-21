@@ -15,9 +15,6 @@ venv/
 # Claude Code (configurações locais)
 .claude/settings.local.json
 
-# Dados das agências e catálogo (baixar com `python -m kickoff.api kit <Agencia>`)
-dados/*/
-dados/catalogo.json
 
 # Respostas salvas do juiz
 resp*.json

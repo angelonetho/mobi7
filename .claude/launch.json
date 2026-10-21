@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cliente",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["cliente.py", "--sem-navegador"],
+      "port": 8765
+    }
+  ]
+}

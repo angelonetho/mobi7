@@ -1,0 +1,113 @@
+{
+ "fonte": "ANEXO_H4_EQUIPES.md (valores padrão; conferir GET /catalogo, a organização pode ajustar)",
+ "carregadores": [
+  {
+   "id": "ac_7",
+   "custo": 250
+  },
+  {
+   "id": "ac_11",
+   "custo": 1100
+  },
+  {
+   "id": "ac_22x2",
+   "custo": 1500
+  },
+  {
+   "id": "dc_30",
+   "custo": 3500
+  },
+  {
+   "id": "dc_60x2",
+   "custo": 7300
+  },
+  {
+   "id": "dc_120x2",
+   "custo": 15800
+  }
+ ],
+ "entradas": [
+  {
+   "id": "b3_45",
+   "custo": 0
+  },
+  {
+   "id": "b3_75",
+   "custo": 5000
+  },
+  {
+   "id": "a4_150",
+   "custo": 6500
+  },
+  {
+   "id": "a4_225",
+   "custo": 8200
+  },
+  {
+   "id": "a4_300",
+   "custo": 10000
+  },
+  {
+   "id": "se_500",
+   "custo": 18800
+  },
+  {
+   "id": "se_750",
+   "custo": 24400
+  },
+  {
+   "id": "se_1000",
+   "custo": 30000
+  },
+  {
+   "id": "se_1500",
+   "custo": 41200
+  },
+  {
+   "id": "se_2000",
+   "custo": 52500
+  }
+ ],
+ "pesos": {
+  "Bangkok": {
+   "certo": 15,
+   "upgrade": 8,
+   "nao_atendido": -200,
+   "demanda_contratada": -2,
+   "energia_ponta_kwh": -0.5,
+   "infraestrutura": -1
+  },
+  "Hanoi": {
+   "certo": 15,
+   "upgrade": 8,
+   "nao_atendido": -200,
+   "demanda_contratada": -2,
+   "energia_ponta_kwh": -0.5,
+   "infraestrutura": -1
+  },
+  "Istanbul": {
+   "certo": 15,
+   "upgrade": 8,
+   "nao_atendido": -200,
+   "demanda_contratada": -2,
+   "energia_ponta_kwh": -0.5,
+   "infraestrutura": -1
+  },
+  "Marrakech": {
+   "certo": 15,
+   "upgrade": 8,
+   "nao_atendido": -200,
+   "demanda_contratada": -2,
+   "energia_ponta_kwh": -0.5,
+   "infraestrutura": -1
+  },
+  "Zurich": {
+   "certo": 15,
+   "upgrade": 8,
+   "nao_atendido": -200,
+   "demanda_contratada": -2,
+   "energia_ponta_kwh": -0.5,
+   "infraestrutura": -1
+  }
+ }
+}
