@@ -1,0 +1,13 @@
+{
+ "agencia": "Marrakech",
+ "carregadores": {
+  "ac_7": 9,
+  "dc_30": 1
+ },
+ "entrada": "a4_150",
+ "politica": {
+  "prioridade": "proxima_retirada",
+  "divisao": "prioridade",
+  "evitar_ponta": true
+ }
+}
