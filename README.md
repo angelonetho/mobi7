@@ -35,7 +35,7 @@ Notas do motor local na janela pública, com os eventos de `validacao/`. Em Bang
 
 | Agência | Nota | Atendimento | Solução |
 |---|---:|---:|---|
-| Bangkok | 3.100,0 | 100% | 3× ac_7, b3_45, sem carga na ponta |
+| Bangkok | 3.100,0 | 99,63% | 3× ac_7, b3_45, sem carga na ponta |
 | Hanoi | 6.211,0 | 99,91% | 5× ac_7 e 1× dc_30, b3_75 |
 | Istanbul | 3.624,0 | 100% | 1× ac_7 e 3× dc_30, b3_75, divisão igual, sem carga na ponta |
 | Lisbon | 12.026,1 | 99,94% | 7× ac_7 e 1× dc_30, a4_150 com 80 kW |
